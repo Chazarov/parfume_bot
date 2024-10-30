@@ -1,6 +1,9 @@
 :root {
     --substrate_color: #e5c2a0;
-    --primary_color: #e3e6dd;
+    --primary_color: white;
+    --second_color: rgb(14, 14, 14);
+	--middle_color: #dfdfdf;
+	--choise_color: #76c8ff;
     --items_color: #d0d7d8;
     --font_color: #111111;
 }
@@ -18,8 +21,60 @@ body {
 
 .container {
     background-color: var(--primary_color);
-    border-radius: 15px;
-    padding: 20px;
+    border-radius: 10px;
     width: 350px;
     height: auto;
+}
+
+.inner_container{
+    min-height: 100px;
+}
+
+.icon-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer; /* Указатель при наведении */
+    display: flex; /* Включаем Flexbox для центрирования иконки */
+    justify-content: center; /* Центрируем по горизонтали */
+    align-items: center; /* Центрируем по вертикали */
+}
+
+.icon-btn :hover{
+    width: 80px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: var(--middle_color);
+    cursor: pointer; /* Указатель при наведении */
+    display: flex; /* Включаем Flexbox для центрирования иконки */
+    justify-content: center; /* Центрируем по горизонтали */
+    align-items: center; /* Центрируем по вертикали */
+}
+
+.navigation_bar {
+    background-color: var(--primary_color);
+    position: fixed;
+    bottom: 20px; 
+    width: 340px;
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    box-shadow: 2px 2px 29px -1px rgba(34, 60, 80, 0.2);
+    border-radius: 20px;
+
+    .icon-btn{
+        color: var(--font_color);
+        width: 70px;
+        height: 50px;
+    }
+    
+    .icon-btn :hover{
+        width: 70px;
+        height: 50px;
+        border-radius: 10px;
+        background-color: var(--middle_color);
+        cursor: pointer; /* Указатель при наведении */
+        display: flex; /* Включаем Flexbox для центрирования иконки */
+        justify-content: center; /* Центрируем по горизонтали */
+        align-items: center; /* Центрируем по вертикали */
+    }
 }
