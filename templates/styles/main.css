@@ -1,0 +1,25 @@
+:root {
+    --substrate_color: #e5c2a0;
+    --primary_color: #e3e6dd;
+    --items_color: #d0d7d8;
+    --font_color: #111111;
+}
+
+body {
+    background-color: var(--substrate_color);
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: var(--font_color);
+}
+
+.container {
+    background-color: var(--primary_color);
+    border-radius: 15px;
+    padding: 20px;
+    width: 350px;
+    height: auto;
+}
