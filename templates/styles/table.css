@@ -1,0 +1,8 @@
+.icon-table {
+    width: 100%;
+    border-collapse: collapse; /* Убираем промежутки между ячейками */
+}
+
+.icon-table td {
+    text-align: center; /* Центрируем содержимое в ячейке */
+}
