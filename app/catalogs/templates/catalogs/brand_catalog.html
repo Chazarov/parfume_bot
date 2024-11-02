@@ -1,0 +1,58 @@
+{% extends 'catalogs/base.html' %}
+{% load static %}
+
+{% block title %} products {% endblock %}
+
+{% block header_title %} Brands {% endblock %}
+
+
+{% block style_dependencies%}
+    <link rel="stylesheet" href="{% static 'other/font-awesome/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/slider.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/table.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/catalog.css' %}">
+{% endblock %}
+
+
+
+
+{% block content%}
+    <table class="icon-table upindent">
+            <tr>
+                <td>
+                    <button onclick="window.location.href='{% url 'products' %}'" class="btn">
+                        <div class="instagram_circle_widget">
+                            <div class="icon big">
+                                <img src="{% static 'img/b1.jpg' %}" alt="Icon" class="small_image">
+                            </div>
+                            <p class="title">AETHER</p>
+                        </div>
+                    </button>
+                </td>
+            </tr>
+
+
+
+
+        </table>
+{% endblock %}
+
+
+
+{% block scripts_dependensies %}
+    
+{% endblock %}
+
+
+        
+
+
+    
+
+
+        
+        
+
+
+

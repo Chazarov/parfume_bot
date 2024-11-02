@@ -8,75 +8,102 @@
     <link rel="stylesheet" href="other/font-awesome/css/all.css">
     <link rel="stylesheet" href="styles/slider.css">
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/catalog.css">
+    <link rel="stylesheet" href="styles/product.css">
 
 </head>
 <body>
-    <div class="container">
-        <div class="all">
-            <input checked type="radio" name="respond" id="desktop">
-                <article id="slider">
-                        <input checked type="radio" name="slider" id="switch1">
-                        <input type="radio" name="slider" id="switch2">
-                        <input type="radio" name="slider" id="switch3">
-                        <input type="radio" name="slider" id="switch4">
-                        <input type="radio" name="slider" id="switch5">
-                    <div id="slides">
-                        <div id="overflow">
-                            <div class="image">
-                                <article><img src="img/1.jpg"></article>
-                                <article><img src="img/2.jpg"></article>
-                                <article><img src="img/3.jpg"></article>
-                                <article><img src="img/4.jpg"></article>
-                                <article><img src="img/5.jpg"></article>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="controls">
-                        <label for="switch1"></label>
-                        <label for="switch2"></label>
-                        <label for="switch3"></label>
-                        <label for="switch4"></label>
-                        <label for="switch5"></label>
-                    </div>
-                    <div id="active">
-                        <label for="switch1"></label>
-                        <label for="switch2"></label>
-                        <label for="switch3"></label>
-                        <label for="switch4"></label>
-                        <label for="switch5"></label>
-                    </div>
-                </article>
-        </div>
+
+    <div class="header">
         <div class="inner_container">
-            <button class="category_btn">
-                <div class="instagram_circle_widget">
-                    <img src="img/1.jpg" alt="Icon" class="icon">
-                    <p class="title">Парфюм</p>
-                </div>
-            </button>
-            <button class="category_btn">
-                <div class="instagram_circle_widget">
-                    <img src="img/2.jpg"  alt="Icon" class="icon">
-                    <p class="title">Косметика</p>
-                </div>
-            </button>
-            <button class="category_btn">
-                <div class="instagram_circle_widget">
-                    <img src="img/3.jpg"  alt="Icon" class="icon">
-                    <p class="title">Наборы</p>
-                </div>
-            </button>
+            <div class="main_title">
+                Brand name
+            </div>
         </div>
-        <div class="inner_container"></div> 
     </div>
+
+    <div class="container">
+
+        
+        <div class="product-card">
+            <div class = "image_container">
+                <img src="img/1.jpg" alt="Товар" class="product-image">
+            </div>
+            
+            <div class="product-details">
+                <div class="top_part">
+                    <p class="product-title">Название товара</p>
+                    <p class="product-description">Краткое описание товара. Краткое описание товара. Краткое описание товара. Краткое описание товара.</p>                    
+                </div>
+
+                <div class="product-price">1000 ₽</div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class = "image_container">
+                <img src="img/2.jpg" alt="Товар" class="product-image">
+            </div>
+            <div class="product-details">
+                <div class="top_part">
+                    <p class="product-title">Название товара</p>
+                    <p class="product-description">Краткое описание товара. Краткое описание товара. Краткое описание товара. Краткое описание товара.</p>                    
+                </div>
+
+                <div class="product-price">1000 ₽</div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class = "image_container">
+                <img src="img/3.jpg" alt="Товар" class="product-image">
+            </div>
+            <div class="product-details">
+                <div class="top_part">
+                    <p class="product-title">Название товара</p>
+                    <p class="product-description">Краткое описание товара. Краткое описание товара. Краткое описание товара. Краткое описание товара.</p>                    
+                </div>
+
+                <div class="product-price">1000 ₽</div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class = "image_container">
+                <img src="img/4.jpg" alt="Товар" class="product-image">
+            </div>
+            <div class="product-details">
+                <div class="top_part">
+                    <p class="product-title">Название товара</p>
+                    <p class="product-description">Краткое описание товара. Краткое описание товара. Краткое описание товара. Краткое описание товара.</p>                    
+                </div>
+
+                <div class="product-price">1000 ₽</div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class = "image_container">
+                <img src="img/5.jpg" alt="Товар" class="product-image">
+            </div>
+            <div class="product-details">
+                <div class="top_part">
+                    <p class="product-title">Название товара</p>
+                    <p class="product-description">Краткое описание товара. Краткое описание товара. Краткое описание товара. Краткое описание товара.</p>                    
+                </div>
+
+                <div class="product-price">1000 ₽</div>
+            </div>
+        </div>
+
+    </div>
+        
     <div class="navigation_bar">
-        <button class="icon-btn"><i class="fa fa-search"></i></button>
-        <button class="icon-btn"><i class="fa fa-reply"></i></button>
-        <button class="icon-btn"><i class="fa fa-shopping-cart"></i></button>
-
+        <a class="icon-btn"><i class="fa fa-search"></i></a>
+        <a class="icon-btn"><i class="fa fa-reply"></i></a>
+        <a class="icon-btn"><i class="fa fa-shopping-cart"></i></a>
+        <a class="icon-btn"><i class="fa fa-user"></i></a>
     </div>
 
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="js/slides.js"></script>
 </body>
 </html>
