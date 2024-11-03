@@ -58,7 +58,7 @@
                 </div>
                 <div id="active">
                     {% for i in range_images %}
-                        <label for="switch{{i}}"></label>
+                        <label for="switch{{forloop.counter}}"></label>
                     {% endfor %}
                 </div>
             </article>

@@ -59,13 +59,13 @@
                 </div>
                 <div id="active">
                     {% for i in range_images %}
-                        <label for="switch{{i}}"></label>
+                    <label for="switch{{forloop.counter}}"></label>
                     {% endfor %}
                     
                 </div>
                 <div class="center-buttons">
                     <button class="square-btn" id = "next_button"><img src="{% static 'img/prev.png' %}"></button>
-                    <button class="square-btn" id = "prev_button"><img src="{% static 'img/next.png' %}"></button>
+                    <button class="square-btn" id = "next_button"><img src="{% static 'img/next.png' %}"></button>
                 </div>
             </article>
     </div>
