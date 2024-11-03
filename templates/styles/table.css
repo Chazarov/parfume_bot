@@ -7,3 +7,10 @@
 .icon-table td {
     text-align: center; /* Центрируем содержимое в ячейке */
 }
+
+.icon-grid {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+

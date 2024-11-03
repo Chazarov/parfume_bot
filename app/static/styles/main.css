@@ -9,6 +9,17 @@
     --font_color: #111111;
 }
 
+button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    text-align: inherit;
+    outline: none;
+}
+
 @font-face {
     font-family: 'Voga';
     src: url('fonts/Voga/voga_medium.otf') format('truetype');
@@ -91,6 +102,10 @@ hr {
     justify-content: space-around;
 }
 
+.indent{
+    margin-bottom: 60px;
+}
+
 
 
 .btn {
@@ -106,6 +121,13 @@ hr {
     justify-content: center; /* Центрируем по горизонтали */
     align-items: center; /* Центрируем по вертикали */
 }
+
+.inner_container_lines{
+    width:335px
+}
+
+
+
 .btn.items_color{
     background-color: var(--items_color);
 }
@@ -121,13 +143,15 @@ hr {
 .instagram_circle_widget .icon{
     width: 50px;
     height: 50px;
-    border-radius: 50%;
+    
     display: flex;
     justify-content: center; /* Центрирование по горизонтали */
     align-items: center; /* Центрирование по вертикали */
     object-fit: cover;
     align-items: center;
+    
     text-align: center;
+    border-radius: 50%;
     border: 2px solid var(--font_color); 
 }
 .instagram_circle_widget .icon:hover{

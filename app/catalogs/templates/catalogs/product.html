@@ -1,4 +1,3 @@
-
 {% extends 'catalogs/base.html' %}
 {% load static %}
 
@@ -10,6 +9,7 @@
     <link rel="stylesheet" href="{% static  'other/font-awesome/css/all.css' %}">
     <link rel="stylesheet" href="{% static 'styles/slider.css' %} ">
     <link rel="stylesheet" href="{% static 'styles/main.css' %} ">
+    <link rel="stylesheet" href="{% static 'styles/product.css' %} ">
 
     <style>
         {% for i in range_images %}
@@ -44,6 +44,7 @@
     <div class="all">
         <input checked type="radio" name="respond" id="desktop"/>
             <article id="slider">
+                
                 {% for i in range_images %}
                     <input {% if forloop.first %}checked{% endif %} type="radio" name="slider" id="switch{{forloop.counter}}" >
                 {% endfor %}
@@ -60,25 +61,19 @@
                     {% for i in range_images %}
                         <label for="switch{{i}}"></label>
                     {% endfor %}
+                    
+                </div>
+                <div class="center-buttons">
+                    <button class="square-btn" id = "next_button"><img src="{% static 'img/prev.png' %}"></button>
+                    <button class="square-btn" id = "prev_button"><img src="{% static 'img/next.png' %}"></button>
                 </div>
             </article>
     </div>
-    <div class="inner_container">
-        {% for category in categories %}
-            <button onclick="window.location.href='{% url 'brands' category_id=category.id %}'" class="btn items_color">
-                <div class="instagram_circle_widget">
-                    <img src="{{category.image.url}}" alt="Icon" class="icon">
-                    <p class="title">{{category.name}}</p>
-                </div>
-            </button>
-        {% endfor %}
-    </div>
-    <div class="indent"></div>
 {% endblock %}
 
 {% block scripts_dependensies %}
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="{% static 'js/slides.js' %} "></script>
+    <script src="{% static 'js/navigation_buttons.js' %} "></script>
 {% endblock %}
 
 

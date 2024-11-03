@@ -36,13 +36,8 @@ article img{ /*размер изображений слайдера*/
 }
 
 /*настройка переключения и положения для левой стрелки*/
-/*если свич1-5 активны, то идет обращение к лейблу из блока с id контролс*/
-#switch1:checked ~ #controls label:nth-child(5), 
-#switch2:checked ~ #controls label:nth-child(1),
-#switch3:checked ~ #controls label:nth-child(2),
-#switch4:checked ~ #controls label:nth-child(3),
-#switch5:checked ~ #controls label:nth-child(4){
-	background: url('prev.png') no-repeat; /*заливка фона картинкой без повторений*/
+.left_arrow{
+	background: url("{% static 'images/prev.png' %}") no-repeat; /*заливка фона картинкой без повторений*/
 	float: left;
 	margin: 0 0 0 -84px; /*сдвиг влево*/
 	display: block;
@@ -51,18 +46,14 @@ article img{ /*размер изображений слайдера*/
 }
 
 /*настройка переключения и положения для правой стрелки*/
-#switch1:checked ~ #controls label:nth-child(2), 
-#switch2:checked ~ #controls label:nth-child(3),
-#switch3:checked ~ #controls label:nth-child(4),
-#switch4:checked ~ #controls label:nth-child(5),
-#switch5:checked ~ #controls label:nth-child(1){
-	background: url('next.png') no-repeat; /*заливка фона картинкой без повторений*/
+.right_arrow{
+	background: url("{% static 'images/next.png' %}") no-repeat; /*заливка фона картинкой без повторений*/
 	float: right;
 	margin: 0 -84px 0 0; /*сдвиг вправо*/
 	display: block;
 	height: 68px;
 	width: 68px;
-}
+} 
 
 label, a{ /*при наведении на стрелки или переключатели - курсор изменится*/
 	cursor: pointer;
@@ -75,22 +66,6 @@ label, a{ /*при наведении на стрелки или переклю�
 /*позиция изображения при активации переключателя*/
 #switch1:checked ~ #slides .image{
 	margin-left: 0;
-}
-
-#switch2:checked ~ #slides .image{
-	margin-left: -100%;
-}
-
-#switch3:checked ~ #slides .image{
-	margin-left: -200%;
-}
-
-#switch4:checked ~ #slides .image{
-	margin-left: -300%;
-}
-
-#switch5:checked ~ #slides .image{
-	margin-left: -400%;
 }
 
 #controls{ /*положение блока всех управляющих элементов*/
@@ -119,11 +94,7 @@ label, a{ /*при наведении на стрелки или переклю�
 }
 
 /*цвет активного лейбла при активации чекбокса*/
-#switch1:checked ~ #active label:nth-child(1),
-#switch2:checked ~ #active label:nth-child(2),
-#switch3:checked ~ #active label:nth-child(3),
-#switch4:checked ~ #active label:nth-child(4),
-#switch5:checked ~ #active label:nth-child(5){
+#switch1:checked ~ #active label:nth-child(1){
 	background: var(--second_color);
 	border-color: var(--second_color) !important;
 }

@@ -18,24 +18,20 @@
 
 
 {% block content%}
-    <table class="icon-table upindent">
-            <tr>
-                <td>
-                    <button onclick="window.location.href='{% url 'products' %}'" class="btn">
+    <div class="icon-grid">
+                {% for brand in brands %}
+                    <button onclick="window.location.href='{% url 'products' category_id=category_id brand_id=brand.id %}'" class="btn">
                         <div class="instagram_circle_widget">
                             <div class="icon big">
-                                <img src="{% static 'img/b1.jpg' %}" alt="Icon" class="small_image">
+                                <img src="{{ brand.image.url}}" alt="Icon" class="small_image">
                             </div>
-                            <p class="title">AETHER</p>
+                            <p class="title">{{brand.name}}</p>
                         </div>
                     </button>
-                </td>
-            </tr>
+                {% endfor %}
 
 
 
-
-        </table>
 {% endblock %}
 
 

@@ -14,24 +14,39 @@
     <link rel="stylesheet" href="{% static 'styles/product.css' %}">
 {% endblock %}
 
-{% block header_title %} Products {% endblock %}
+{% block header_title %} 
+    {% if primary  %}
+        <p> {{ category.name }}</p>
+    {% else %}
+        <p> {{ brand.name }}</p>
+    {% endif %}
+{% endblock %}
 
 
 {% block content%}
-    <div class="product-card">
-        <div class = "image_container">
-            <img src="{% static 'img/3.jpg' %}" alt="Товар" class="product-image">
-        </div>
-        
-        <div class="product-details">
-            <div class="top_part">
-                <p class="product-title">Название товара</p>
-                <p class="product-description">Краткое описание товара. Краткое описание товара. Краткое описание товара. Краткое описание товара.</p>                    
-            </div>
+    {% for product in products %}
+    
+        <div class="inner_container_lines">
+            <button class="btn product-card" onclick="window.location.href='{% url 'product' product_id=product.id %}'">
+                    <div class = "image_container">
+                        {% if product.images.all %}
+                            <img src="{{ product.images.all.0.image.url }}" alt="Товар" class="product-image">
+                        {% else %}
+                            <img src="path/to/default/image.jpg" alt="Нет изображения" class="product-image">
+                        {% endif %}
+                    </div>
+                    
+                        <div class="product-details">
+                            <div class="top_part">
+                                <p class="product-title">{{product.name}}</p>
+                                <p class="product-description">{{product.description}}</p>                    
+                            </div>
 
-            <div class="product-price">1000 ₽</div>
+                            <div class="product-price">{{product.price}} ₽</div>
+                        </div>
+            </button>
         </div>
-    </div>
+    {% endfor %}
 {% endblock %}
 
 
