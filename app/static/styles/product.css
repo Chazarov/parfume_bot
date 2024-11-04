@@ -51,6 +51,7 @@
 
 .product-description {
     margin: 5px 0 0;
+    padding-right: 30px;
     font-family: 'Sweet';
     font-size: 0.8em;
     color: #666; /* Цвет описания */
@@ -70,6 +71,16 @@
     bottom: 0;
     padding-right: 0.8em;
     padding-bottom: 0.8em;
+}
+
+
+.fa-shopping-cart {
+    position: absolute;
+    font-size: 1.5rem;
+    margin-right: auto;
+    right: 10px;
+    bottom: 0;
+    text-align: right; /* Выравнивание по правому краю */
 }
 
 .center-buttons {
@@ -97,4 +108,24 @@
 
 .square-btn:hover {
     background-color: var(--middle_color);
+}
+
+.shopping_cart_button{
+    z-index: 100;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    margin-top: 30px;
+}
+
+.shopping_cart_button:hover{
+    z-index: 100;
+    border-radius: 50%;
+    background-color: var(--middle_color);
+    cursor: pointer;
+    position: absolute;
+    right:10px;
 }

@@ -9,3 +9,14 @@ urlpatterns = [
 ]
 
 
+
+
+requests = [
+    path('api/add_product/<int:product_id>', views.add_product, name='add_product_in_cart'),
+    path('api/remove_product/<int:product_id>', views.remove_product, name='add_product_in_cart')
+]
+
+
+urlpatterns += requests
+
+

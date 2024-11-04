@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{% static 'styles/slider.css' %} ">
     <link rel="stylesheet" href="{% static 'styles/main.css' %} ">
     <link rel="stylesheet" href="{% static 'styles/product.css' %} ">
+    <link rel="stylesheet" href="{% static 'styles/product_item.css' %} ">
 
     <style>
         {% for i in range_images %}
@@ -64,10 +65,43 @@
                     
                 </div>
                 <div class="center-buttons">
-                    <button class="square-btn" id = "next_button"><img src="{% static 'img/prev.png' %}"></button>
+                    <button class="square-btn" id = "prev_button"><img src="{% static 'img/prev.png' %}"></button>
                     <button class="square-btn" id = "next_button"><img src="{% static 'img/next.png' %}"></button>
                 </div>
             </article>
+
+
+
+            <div class="product_details">
+                {% if product.id in products_in_cart %}
+                    <!-- Если продукт в корзине, показываем другой значок -->
+                    <button class="shopping_cart_button" type="button" onclick="window.location.href='{% url 'add_product_in_cart' product_id=product.id %}'">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                    </button>
+                {% else %}
+                    <!-- Если продукта нет в корзине, показываем кнопку добавления -->
+                    <button class="shopping_cart_button" type="button" onclick="window.location.href='{% url 'add_product_in_cart' product_id=product.id %}'">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    </button>
+                {% endif %}
+                <div class = "name">{{product.name}}</div>
+                <div class = "price_value"> {{product.price}} ₽</div>
+                
+                <div class = "block">
+                    <div class = "item">Возможный объем: </div><div class="value"> {{product.volumes}} </div>
+                    <div class = "item">Товарный вид:</div> <div class = "value"> {{product.type_of_product}} </div>
+                    <div class = "item"> Страна-производитель: </div> <div class = "value">{{product.country}}</div>
+                    <div class = "item"><button class="btn items_color get_cost">Уточнить цену</button></div>
+                </div>
+                
+                
+                
+                
+                
+                
+                
+            </div>
+            <div class="indent"></div>
     </div>
 {% endblock %}
 

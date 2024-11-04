@@ -39,12 +39,20 @@ class Product(models.Model):
     description = models.TextField("Описание")
     brand = models.ForeignKey(Brand, null=True, on_delete=models.SET_NULL)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    country = models.CharField("Страна производитель", default="неизвестно", max_length=55)
+    volumes = models.CharField("Объемы",  max_length=22)
+    type_of_product = models.CharField("Вид товара",  max_length=22)
 
     class Meta:
         verbose_name_plural = "Товары"
 
     def __str__(self):
         return self.name
+    
+
+
+    
+
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
@@ -76,6 +84,14 @@ class Cart(models.Model):
 
     class Meta:
         verbose_name_plural = "Корзины"
+
+    @property
+    def is_empty(self):
+        return not self.items.exists()
+    
+    @property
+    def total_quantity(self):
+        return sum(item.quantity for item in self.items.all())
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
