@@ -1,0 +1,73 @@
+
+{% extends 'catalogs/base.html' %}
+{% load static %}
+
+{% block title %} products {% endblock %}
+
+
+
+{% block style_dependencies%}
+    <link rel="stylesheet" href="{% static 'other/font-awesome/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/slider.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/catalog.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/product.css' %}">
+{% endblock %}
+
+{% block header_title %} 
+    {% if primary  %}
+        <p> {{ category.name }}</p>
+    {% else %}
+        <p> {{ brand.name }}</p>
+    {% endif %}
+{% endblock %}
+
+
+{% block content%}
+    {% for product in products %}
+            
+            
+
+            <div class="product-card">
+                
+                <div class = "two_parts_layer">
+                    <button class="btn" onclick="window.location.href='{% url 'product' product_id=product.id %}'"></button>
+                    {% if product.id in products_in_cart %}
+                        <!-- Если продукта нет в корзине, показываем кнопку добавления -->
+                        <button class="shopping_cart_button" type="button" onclick="window.location.href='{% url 'remove_product_in_cart' product_id=product.id %}'">
+                            <div class="icon-btn"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
+                        </button>
+                    {% else %}
+                        <!-- Если продукт в корзине, показываем другой значок -->
+                        <button class="shopping_cart_button" type="button" onclick="window.location.href='{% url 'add_product_in_cart' product_id=product.id %}'">
+                            <div class="icon-btn"><i class="fa fa-plus" aria-hidden="true"></i></div>
+                        </button>
+                    {% endif %}
+                </div>
+                
+                
+                <div class = "image_container">
+                    {% if product.images.all %}
+                        <img src="{{ product.images.all.0.image.url }}" alt="Товар" class="product-image">
+                    {% else %}
+                        <img src="{% static 'img/default.jpg' %}" alt="Нет изображения" class="product-image">
+                    {% endif %}
+                </div>
+                    
+                <div class="product-details">
+                    <div class="top_part">
+                        <p class="product-title">{{product.name}}</p>
+                        <p class="product-description">{{product.description}}</p>                    
+                    </div>
+                    <div class="product-price">{{ product.price }} ₽</div>
+                </div>
+            </div>
+    {% endfor %}
+{% endblock %}
+
+
+
+{% block scripts_dependensies %} {% endblock %}
+
+
+        

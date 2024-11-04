@@ -109,6 +109,7 @@ hr {
 
 
 .btn {
+    z-index: 120;
     padding: 0;
     margin: 0;
 
@@ -207,6 +208,7 @@ hr {
 }
 
 .navigation_bar {
+    z-index: 500;
     background-color: var(--primary_color);
     position: fixed;
     bottom: 0.5em; 
@@ -240,8 +242,9 @@ hr {
     position: absolute;
     top: 0;
     right: 0;
-    background-color: red;
-    color: white;
+
+    background-color: var(--choise_color);
+    color: var(--primary_color);
     border-radius: 50%;
     padding: 5px 10px;
     font-size: 12px;

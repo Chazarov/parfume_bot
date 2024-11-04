@@ -33,14 +33,16 @@
 .product-details {
     flex-grow: 1; /* Занимает доступное пространство */
     padding: 0 5px; /* Отступы справа и слева */
+
+    .top_part{
+        position: absolute;
+        top: 0;
+        left: 100px;
+        padding: 10px;
+    }
 }
 
-.top_part{
-    position: absolute;
-    top: 0;
-    left: 100px;
-    padding: 10px;
-}
+
 
 .product-title {
     margin: 0;
@@ -74,14 +76,6 @@
 }
 
 
-.fa-shopping-cart {
-    position: absolute;
-    font-size: 1.5rem;
-    margin-right: auto;
-    right: 10px;
-    bottom: 0;
-    text-align: right; /* Выравнивание по правому краю */
-}
 
 .center-buttons {
     position: absolute;
@@ -112,20 +106,57 @@
 
 .shopping_cart_button{
     z-index: 100;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
     cursor: pointer;
-    position: absolute;
-    right: 10px;
-    margin-top: 30px;
+    display: flex;
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center;     /* Центрирование по вертикали */
+
+    .icon-btn{
+        margin-left: 10px;
+        display: flex;
+        border-radius: 50%;
+        justify-content: center; /* Центрирование по горизонтали */
+        align-items: center;     /* Центрирование по вертикали */
+        width: 40px;
+        height: 40px;
+
+    }
+
+    .icon-btn:hover{
+        border-radius: 50%;
+        background-color: var(--middle_color);
+    }
+    
+    i {
+        font-size: 1.5rem;
+        border-radius: 5px;
+    }
+
 }
 
-.shopping_cart_button:hover{
-    z-index: 100;
-    border-radius: 50%;
-    background-color: var(--middle_color);
-    cursor: pointer;
+
+.two_parts_layer {
     position: absolute;
-    right:10px;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+}
+
+.two_button_layer button:first-child {
+    flex: 4;
+}
+
+.two_button_layer button:last-child {
+    flex: 1;
+}
+
+.two_button_layer div:first-child {
+    flex: 4;
+}
+
+.two_button_layer div:last-child {
+    flex: 1;
 }

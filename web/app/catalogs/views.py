@@ -1,7 +1,9 @@
+import requests
+
 from django.shortcuts import render
 from django.core.handlers.wsgi import WSGIRequest
 from catalogs.models import Category, Brand, Product, SliderImges, ProductImage, Cart, CartItem
-from django.http import HttpResponseBadRequest, HttpResponse
+from django.http import HttpResponseBadRequest, HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404
 
 
@@ -45,6 +47,7 @@ def products_page(request, brand_id, category_id, prime_category:bool=False):
 
     category = None
     brand = None
+
     category = Category.objects.get(id=category_id)
     cart_items = CartItem.objects.filter(cart=request.cart)
     products_in_cart = [item.product.id for item in cart_items]
@@ -76,9 +79,7 @@ def product_page(request:WSGIRequest, product_id):
     range_images = range(len(images))
     cart_items = CartItem.objects.filter(cart=request.cart)
     products_in_cart = [item.product.id for item in cart_items]
-    in_cart = product in products_in_cart
-
-    print(images[0].image.url)
+    in_cart = product_id in products_in_cart
 
     return render(request, 'catalogs/product.html',
     {
@@ -90,30 +91,82 @@ def product_page(request:WSGIRequest, product_id):
     })
 
 
-def add_product(request:WSGIRequest, product_id):
-
-    product = Product.objects.get(id = product_id)
-    if(request.method == 'GET'):
-        if('add_product' in request.GET):
-            print("add product❗❗❗")
-            cart_item, created = CartItem.objects.get_or_create(product=product, cart=request.cart)
+def add_product(request: WSGIRequest, product_id):
+    product = Product.objects.get(id=product_id)
     
-        return HttpResponse("Product successfully added to cart")
+    if request.method == 'GET':
+        # Получаем или создаем объект CartItem
+        cart_item, created = CartItem.objects.get_or_create(product=product, cart=request.cart)
+        
+        cart_item.save()
+        
+         # Перенаправляем на ту же страницу
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))  # Перенаправление на предыдущую страницу
     else:
-        return HttpResponseBadRequest("Invalid request method or missing 'add_product'")
+        return HttpResponseBadRequest("Invalid request method")
 
 
 def remove_product(request: WSGIRequest, product_id):
 
     product = get_object_or_404(Product, id=product_id)
+    print(request)
+    print(request.method)
+    print(request.GET)
 
-    if request.method == 'GET' and 'remove_product' in request.GET:
+    if request.method == 'GET':
         # Ищем CartItem, соответствующий продукту и корзине
         cart_item = CartItem.objects.filter(cart=request.cart, product=product).first()
         if cart_item:
             cart_item.delete()  # Удаляем товар из корзины
-            return HttpResponse("Product successfully remove from cart")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))  # Перенаправление на предыдущую страницу
         else:
             return HttpResponseBadRequest("Product not found in cart")
     else:
-        return HttpResponseBadRequest("Invalid request method or missing 'remove_product'")
+        return HttpResponseBadRequest("Invalid request method")
+    
+
+
+
+def place_a_cart(request:WSGIRequest):
+    
+
+    bot_api = 'https://t.me/@C000lBot'
+    bot_url = 'https://t.me/@C000lBot'
+    
+    cart = request.cart 
+    
+    cart_items = []
+    for item in cart:
+        cart_items.append({
+            'product_id': item.product_id,
+            'name': item.name,
+            'quantity': item.quantity,
+            'price': item.price
+        })
+    
+    telegram_id = request.GET.get('tgUserId') 
+    
+    if not telegram_id:
+        return JsonResponse({'error': 'Telegram ID not provided'}, status=400)
+    
+    print("❗❗❗")
+    print(request.body)
+    print(request)
+
+    response = requests.post(bot_url, json={
+        'telegram_id': telegram_id,
+        'cart': cart_items
+    })
+    
+    if response.status_code == 200:
+        return HttpResponseRedirect(bot_url)
+    else:
+        return JsonResponse({'status': 'failure', 'details': response.text}, status=response.status_code)
+    
+
+def get_help(request):
+    
+
+    help_url = 'https://t.me/ZAM_Andrew'
+    
+    return HttpResponseRedirect(help_url)

@@ -90,13 +90,18 @@ class Cart(models.Model):
         return not self.items.exists()
     
     @property
-    def total_quantity(self):
-        return sum(item.quantity for item in self.items.all())
+    def item_count(self):
+        return len(list(self.items.all()))
+    
+    @property
+    def item_count_short(self):
+        l = len(list(self.items.all()))
+        if(l > 9): return "9+"
+        return l
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=1)
 
     class Meta:
         verbose_name_plural = "Позиции корзины"

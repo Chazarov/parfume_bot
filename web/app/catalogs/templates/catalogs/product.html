@@ -70,39 +70,45 @@
                 </div>
             </article>
 
-
+    </div>
 
             <div class="product_details">
-                {% if product.id in products_in_cart %}
-                    <!-- Если продукт в корзине, показываем другой значок -->
-                    <button class="shopping_cart_button" type="button" onclick="window.location.href='{% url 'add_product_in_cart' product_id=product.id %}'">
-                        <i class="fa fa-check" aria-hidden="true"></i>
-                    </button>
-                {% else %}
-                    <!-- Если продукта нет в корзине, показываем кнопку добавления -->
-                    <button class="shopping_cart_button" type="button" onclick="window.location.href='{% url 'add_product_in_cart' product_id=product.id %}'">
-                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                    </button>
-                {% endif %}
-                <div class = "name">{{product.name}}</div>
-                <div class = "price_value"> {{product.price}} ₽</div>
+
+                <div class = "top_part">
+                    <div class = "two_parts_layer">
+                        <div class="left_block">
+                            <div class = "name">{{product.name}}</div>
+                            <div class = "price_value"> {{product.price}} ₽</div>
+                        </div>
+
+                        {% if in_cart %}
+                            <!-- Если продукта нет в корзине, показываем кнопку добавления -->
+                            <button class="shopping_cart_button right_block" type="button" onclick="window.location.href='{% url 'remove_product_in_cart' product_id=product.id %}'">
+                                <div class="icon-btn"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
+                            </button>
+                        {% else %}
+                            <!-- Если продукт в корзине, показываем другой значок -->
+                            <button class="shopping_cart_button right_block" type="button" onclick="window.location.href='{% url 'add_product_in_cart' product_id=product.id %}'">
+                                <div class="icon-btn"><i class="fa fa-plus" aria-hidden="true"></i></div>
+                            </button>
+                        {% endif %}
+                        
+                    </div>
+                </div>
+                
+                
+
+                
                 
                 <div class = "block">
-                    <div class = "item">Возможный объем: </div><div class="value"> {{product.volumes}} </div>
+                    <div class = "item">Возможный объем: {{in_cart}}</div><div class="value"> {{product.volumes}} </div>
                     <div class = "item">Товарный вид:</div> <div class = "value"> {{product.type_of_product}} </div>
                     <div class = "item"> Страна-производитель: </div> <div class = "value">{{product.country}}</div>
                     <div class = "item"><button class="btn items_color get_cost">Уточнить цену</button></div>
                 </div>
-                
-                
-                
-                
-                
-                
-                
             </div>
             <div class="indent"></div>
-    </div>
+    
 {% endblock %}
 
 {% block scripts_dependensies %}
