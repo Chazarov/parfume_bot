@@ -129,22 +129,24 @@ def remove_product(request: WSGIRequest, product_id):
 
 def place_a_cart(request:WSGIRequest):
     
-
-    bot_api = 'https://t.me/@C000lBot'
-    bot_url = 'https://t.me/@C000lBot'
+    print("❗❗❗")
+    print(request)
+    bot_api = 'http://localhost:8080/cart'
     
-    cart = request.cart 
+    cart:Cart = request.cart 
     
     cart_items = []
-    for item in cart:
+    for item in cart.items.all():
+        item: Product
+
         cart_items.append({
-            'product_id': item.product_id,
+            'product_id': item.id,
             'name': item.name,
-            'quantity': item.quantity,
             'price': item.price
         })
     
-    telegram_id = request.GET.get('tgUserId') 
+    telegram_id = request.GET.get('tgUserId')  
+    username = request.GET.get('username') 
     
     if not telegram_id:
         return JsonResponse({'error': 'Telegram ID not provided'}, status=400)
@@ -153,15 +155,17 @@ def place_a_cart(request:WSGIRequest):
     print(request.body)
     print(request)
 
-    response = requests.post(bot_url, json={
+    response = requests.post(bot_api, json={
         'telegram_id': telegram_id,
+        'username': username,
         'cart': cart_items
     })
     
-    if response.status_code == 200:
-        return HttpResponseRedirect(bot_url)
-    else:
-        return JsonResponse({'status': 'failure', 'details': response.text}, status=response.status_code)
+    # if response.status_code == 200:
+    print("❤️❤️❤️")
+    return JsonResponse({'status': 'success'})
+    # else:
+    #     return JsonResponse({'status': 'failure', 'details': response.text}, status=response.status_code)
     
 
 def get_help(request):
