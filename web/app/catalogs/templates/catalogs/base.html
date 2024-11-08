@@ -23,11 +23,14 @@
     </div>
     {% endblock %}
 
+    {% block fixed_objects %}
+    {% endblock %}
+
     <div class="navigation_bar">
 
         <button class="icon-btn" onclick="window.location.href='{% url 'start' %}'"><i class="fa fa-search"></i></button>
         <button class="icon-btn" onclick="window.location.href='{% url 'start' %}'"><i class="fa fa-reply"></i></button>
-        <button class="icon-btn" id="cart">{% if not request.cart.is_empty%}<span class="badge"> {{ request.cart.item_count_short }} </span>{% endif %}<i class="fa fa-shopping-cart"></i></button>
+        <button class="icon-btn" onclick="window.location.href='{% url 'get_cart' %}'">{% if not request.cart.is_empty%}<span class="badge"> {{ request.cart.item_count_short }} </span>{% endif %}<i class="fa fa-shopping-cart"></i></button>
         <button class="icon-btn" onclick="window.location.href='{% url 'get_help' %}'"><i class="fa fa-user"></i></button>
     </div>
     <div class="container">
@@ -40,7 +43,6 @@
 
     {% block scripts_dependensies %}{% endblock %}
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="{% static 'js/telegram_integration.js' %} "></script>
 
 </body>
 </html>

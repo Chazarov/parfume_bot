@@ -15,11 +15,11 @@
 {% endblock %}
 
 {% block header_title %} 
-    {% if primary  %}
-        <p> {{ category.name }}</p>
-    {% else %}
-        <p> {{ brand.name }}</p>
-    {% endif %}
+    Корзина
+{% endblock %}
+
+{% block fixed_objects %}
+    <button class = "process_order" id="process_order">сделать заказ</button>
 {% endblock %}
 
 
@@ -28,21 +28,13 @@
             
             
 
-            <div class="product_card">
+            <div class="product_card big">
                 
                 <div class = "two_parts_layer">
                     <button class="btn" onclick="window.location.href='{% url 'product' product_id=product.id %}'"></button>
-                    {% if product.id in products_in_cart %}
-                        <!-- Если продукта нет в корзине, показываем кнопку добавления -->
-                        <button class="shopping_cart_button" type="button" onclick="window.location.href='{% url 'remove_product_in_cart' product_id=product.id %}'">
-                            <div class="icon-btn"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
-                        </button>
-                    {% else %}
-                        <!-- Если продукт в корзине, показываем другой значок -->
-                        <button class="shopping_cart_button" type="button" onclick="window.location.href='{% url 'add_product_in_cart' product_id=product.id %}'">
-                            <div class="icon-btn"><i class="fa fa-plus" aria-hidden="true"></i></div>
-                        </button>
-                    {% endif %}
+                    <button class="shopping_cart_button" type="button" onclick="window.location.href='{% url 'remove_product_in_cart' product_id=product.id %}'">
+                        <div class="icon-btn"><i class="fa fa-minus" aria-hidden="true"></i></div>
+                    </button>
                 </div>
                 
                 
@@ -67,7 +59,7 @@
 
 
 
-{% block scripts_dependensies %} {% endblock %}
+{% block scripts_dependensies %} <script src="{% static 'js/telegram_integration.js' %} "></script> {% endblock %}
 
 
         

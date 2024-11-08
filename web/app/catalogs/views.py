@@ -81,8 +81,7 @@ def product_page(request:WSGIRequest, product_id):
     products_in_cart = [item.product.id for item in cart_items]
     in_cart = product_id in products_in_cart
 
-    return render(request, 'catalogs/product.html',
-    {
+    return render(request, 'catalogs/product.html',{
         "product":product,
         "images":images,
         "range_images":range_images,
@@ -127,7 +126,7 @@ def remove_product(request: WSGIRequest, product_id):
 
 
 
-def place_a_cart(request:WSGIRequest):
+def process_order(request:WSGIRequest):
     
     print("❗❗❗")
     print(request)
@@ -166,6 +165,16 @@ def place_a_cart(request:WSGIRequest):
     return JsonResponse({'status': 'success'})
     # else:
     #     return JsonResponse({'status': 'failure', 'details': response.text}, status=response.status_code)
+
+def get_cart(request):
+
+    products = request.cart.items.all()
+
+
+    return render(request, 'catalogs/cart_list.html',
+    {
+        "products":products,
+    })
     
 
 def get_help(request):

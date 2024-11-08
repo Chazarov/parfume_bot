@@ -1,31 +1,28 @@
 const tg = window.Telegram.WebApp;
 tg.expand();
 
+console.log("Connect")
+
 
 const BOT_LOCATION = "https://t.me/C000lBot"
 
 
 function sendCartToServer() {
-    // Проверяем, что Telegram Web Apps API доступен
     if (window.Telegram.WebApp) {
 
         
 
-        // Получаем информацию о пользователе
         const userId = tg.initDataUnsafe.user.id;
         const username = tg.initDataUnsafe.user.username
 
 
-        // URL для отправки данных
-        const serverUrl = '/api/cart'; // Замените на нужный URL
+        const serverUrl = '/api/process_order'; 
 
-        // Формируем параметры для GET-запроса
         const params = new URLSearchParams({
             tgUserId: userId,
             username: username,
         });
 
-        // Отправляем GET-запрос на сервер
         fetch(`${serverUrl}?${params.toString()}`, {
             method: 'GET',
         })
@@ -52,7 +49,7 @@ function sendCartToServer() {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    const cartButton = document.getElementById('cart');
+    const cartButton = document.getElementById('process_order');
     if (cartButton) {
         cartButton.addEventListener('click', () => {
             sendCartToServer();

@@ -1,5 +1,9 @@
+.product_card.big{
+    height: 11em;
+}
 
-.product-card {
+
+.product_card {
     position: relative;
     display: block;
     align-items: center;
@@ -14,17 +18,22 @@
     box-shadow: 1px 0px 10px 10px rgba(71, 69, 64, 0.158);
 }
 
+
+
 .image_container{
     width: 100px; /* Ширина изображения */
-    height: 8.5em;
+    height: 100%;
     border-radius: 15px 0 0 15px; /* Закругление углов слева */
     overflow: hidden;
 }
 
+.image_container .big{
+    height: 9.2em;
+}
+
 
 .product-image {
-    width: 100%; /* Ширина изображения */
-    height: 8.7em;
+    height: 100%; /* Ширина изображения */
     object-fit: contain;
     border-radius: 15px 0 0 15px; /* Закругление углов слева */
 
@@ -159,4 +168,23 @@
 
 .two_button_layer div:last-child {
     flex: 1;
+}
+
+
+button.process_order{
+    z-index: 200;
+    position: fixed;
+    bottom: 4em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    width: 9em;
+    height: 2em;
+
+    font-family: "Sweet";
+    font-weight: 100;
+    border-radius: 2px;
+    background-color: var(--second_color);
+    color: var(--primary_color);
 }
