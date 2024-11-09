@@ -10,18 +10,18 @@ from django.shortcuts import get_object_or_404
 def start_page(request):
 
     categories = Category.objects.all()
-    images = SliderImges.objects.all()
-    images_count = len(images)
-    range_images = range(images_count)
+    slides = SliderImges.objects.all()
+    slides_count = len(slides)
+    range_slides = range(slides_count)
     
 
 
     return render(request, 'catalogs/start.html', 
     {
         'categories':categories,
-        'images':images,
-        'range_images':range_images,
-        'images_count':images_count
+        'slides':slides,
+        'range_slides':range_slides,
+        'slides_count':slides_count
     })
 
 

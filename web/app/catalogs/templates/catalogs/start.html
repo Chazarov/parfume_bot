@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{% static 'styles/main.css' %} ">
 
     <style>
-        {% for i in range_images %}
+        {% for i in range_slides %}
             {% if forloop.first %}
                 #switch{{ forloop.counter }}:checked ~ #slides .image {
                     margin-left: 0;
@@ -25,7 +25,7 @@
         {% endfor %}
 
 
-        {% for i in range_images %}
+        {% for i in range_slides %}
             #switch{{ forloop.counter }}:checked ~ #active label:nth-child({{forloop.counter}}){
                 background: var(--second_color);
                 border-color: var(--second_color) !important;
@@ -44,20 +44,24 @@
     <div class="all">
         <input checked type="radio" name="respond" id="desktop"/>
             <article id="slider">
-                {% for i in range_images %}
+                {% for i in range_slides %}
                     <input {% if forloop.first %}checked{% endif %} type="radio" name="slider" id="switch{{forloop.counter}}" >
                 {% endfor %}
                 <div id="slides">
                     <div id="overflow">
                         <div class="image">
-                            {% for image in images %}
-                                <article><img src="{{ image.image.url }}"></article>
+                            {% for slide in slides %}
+                                <article>
+                                    <div class="slide">
+                                        <p></p>
+                                        <p><button class="inner_button"> перейти </button><img src="{{ slide.image.url }}"></div></p>
+                                    </article>
                             {% endfor %}
                         </div>
                     </div>
                 </div>
                 <div id="active">
-                    {% for i in range_images %}
+                    {% for i in range_slides %}
                         <label for="switch{{forloop.counter}}"></label>
                     {% endfor %}
                 </div>

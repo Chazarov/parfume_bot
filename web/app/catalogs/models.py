@@ -70,9 +70,11 @@ class ProductImage(models.Model):
 
 class SliderImges(models.Model):
     image = models.ImageField("Изображение", upload_to='product_images/', max_length=255)
+    title = models.CharField("Описание", max_length=255)
+    brand = models.ForeignKey(Brand , null=True, on_delete=models.SET_NULL)
 
     class Meta:
-        verbose_name_plural = "Изображения слайдера"
+        verbose_name_plural = "Баннеры стартового слайдера"
 
     def __str__(self):
         return self.image.name  # Возвращает имя файла изображения
