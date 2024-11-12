@@ -70,6 +70,24 @@ def products_page(request, brand_id, category_id, prime_category:bool=False):
     })
 
 
+def brand_products(request, brand_id):
+     
+    products = Product.objects.filter(brand__id = brand_id)
+    brand = Brand.objects.get(id = brand_id)
+    prime_category = False
+    cart_items = CartItem.objects.filter(cart=request.cart)
+    products_in_cart = [item.product.id for item in cart_items]
+
+    return render(request, 'catalogs/product_catalog.html',
+    {
+        "products":products,
+        "category":None,
+        "band":brand,
+        "primary":prime_category,
+        "products_in_cart":products_in_cart,
+    })
+
+
 
 def product_page(request:WSGIRequest, product_id):
     
