@@ -1,7 +1,8 @@
 :root {
-    --substrate_color: #eca685;
-    --primary_color: white;
-    --second_color: rgb(14, 14, 14);
+    --primary_color: rgb(255, 255, 255);
+    --second_color: rgb(243,232,152);
+    --color_3: #111111;
+    --contrast_color: #e6c7bc;
 	--middle_color: #dfdfdf;
     --middle_transpanent_color: rgba(223, 223, 223, 100);
 	--choise_color: #76c8ff;
@@ -21,35 +22,32 @@ button {
 }
 
 @font-face {
-    font-family: 'Voga';
-    src: url('fonts/Voga/voga_medium.otf') format('truetype');
+    font-family: 'Futura';
+    src: url('fonts/futura/futura.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'Fenix';
-    src: url('fonts/Fenix/Fenix-Regular.ttf') format('truetype');
+    font-family: 'Gotham';
+    src: url('fonts/gotham/gotham.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'Sweet';
-    src: url('fonts/Sweet/Sweet.ttf') format('truetype');
-    }
-
-@font-face {
-    font-family: 'Faberge';
-    src: url('fonts/Faberge/Faberge.ttf') format('truetype');
+    font-family: 'Impact';
+    src: url('fonts/impact/impact.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'Futuris regular';
+    src: url('fonts/futuris_regular/futuris_regular.ttf') format('truetype');
+}
 
 body {
-    margin: 0;
-    background-color: var(--substrate_color);
-    font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
+
+    background-image: url("{% static 'img/background.png' %}");
+    background-size: cover;
     color: var(--font_color);
 }
 
@@ -58,20 +56,24 @@ body {
 .container {
     background-color: var(--primary_color);
     border-radius: 10px;
-    width: 350px;
+    min-width: 300px;
+    max-width: 500px;
+    width: 100%;
     min-height: 600px;
-    position: absolute; /* Абсолютное позиционирование */
-    top: 20px; /* Прикрепляем к верхней части */
-    left: 50%; /* Центрируем по горизонтали */
-    transform: translateX(-50%); /* Сдвигаем на половину ширины */
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 .header{
     background-color: var(--primary_color);
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
-    border-bottom: 1px solid var(--font_color);
+    border-bottom: 1px solid var(--second_color);
 
-    width: 350px;
+    min-width: 300px;
+    max-width: 500px;
+    width: 100%;
     height: 6em;
     position: fixed;
     top: 0em;
@@ -83,7 +85,7 @@ body {
 .main_title{
     padding: 20px;
     font-size: 25px;
-    font-family: 'Sweet';
+    font-family: 'Futura';
     font-weight: 1000;
 }
 
@@ -97,7 +99,7 @@ hr {
 
 .inner_container {
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: 3px;
     display: flex;
     justify-content: space-around;
 }
@@ -109,7 +111,7 @@ hr {
 
 
 .btn {
-    z-index: 120;
+    z-index: 300;
     padding: 0;
     margin: 0;
 
@@ -142,35 +144,48 @@ hr {
     width: 100px;
 }
 .instagram_circle_widget .icon{
+    z-index: 200;
     width: 50px;
     height: 50px;
     
     display: flex;
-    justify-content: center; /* Центрирование по горизонтали */
-    align-items: center; /* Центрирование по вертикали */
+    justify-content: center;
+    align-items: center;
     object-fit: cover;
     align-items: center;
     
     text-align: center;
+    border-radius: 50%; 
+}
+.instagram_circle_widget .border{
+    z-index: 100;
+    position: absolute;
+    border: none;
     border-radius: 50%;
-    border: 2px solid var(--font_color); 
+    width: 50px;
+    height: 50px;
 }
 .instagram_circle_widget .icon:hover{
     width: 50px;
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
-    border: 1px solid var(--font_color); 
 }
 .instagram_circle_widget .title{
-    font-family: 'Fenix';
+    
     margin-top: 6px;
     font-size: 13px;
     color: #333;
-    font-style: italic;
+
+    font-family: 'Futura';
+
     font-weight: 1000;
 }
 .instagram_circle_widget .icon.big {
+    width: 80px;
+    height: 80px;
+}
+.instagram_circle_widget .border.big{
     width: 80px;
     height: 80px;
 }
@@ -217,7 +232,7 @@ hr {
     display: flex;
     justify-content: space-around;
     box-shadow: 2px 2px 29px -1px rgba(34, 60, 80, 0.2);
-    border-radius: 20px;
+    border-radius: 1px;
 
     .icon-btn{
         color: var(--font_color);
@@ -248,4 +263,5 @@ hr {
     border-radius: 50%;
     padding: 5px 10px;
     font-size: 12px;
+    font-weight: 1000;
 }

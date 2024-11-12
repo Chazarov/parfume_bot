@@ -18,7 +18,6 @@
 #slides .image{ 
 	width: 500%;
 	margin-top: -10%;
-	line-height: 0;
 }
 
 .slide{ 
@@ -27,30 +26,38 @@
 	width: 100%;
 }
 
-.inner_button{
+.slide .inner_button{
 	z-index: 300;
 	position: absolute;
-	bottom: 30px;
+	bottom: 40px;
 	left: 30px;
+	padding-left: 25px;
+	padding-right: 25px;
 
-	width: 90px;
+	font-size: 14px;
+	font-weight: 700;
+	font-family: 'Futura';
+
 	height: 30px;
-	background-color: var(--second_color);
+	background-color: var(--color_3);
 	color: var(--primary_color)
 }
-.inner_button:hover{
+.slide .inner_button:hover{
 	background-color: var(--middle_color);
 }
-
-.title{
+.slide .title{
 	z-index: 300;
 	position: absolute;
-	bottom: 60px;
-	left: 30px;
-	word-wrap: break-word;
-    white-space: normal;
+	text-align: left;
+	width: 70%;
 
-	color: var(--second_color)
+	bottom: 80px;
+	left: 30px;
+
+	font-family: 'Futura';
+	font-size: 20px;
+
+	color: var(--primary_color)
 }
 
 #overflow{ /*сркывает все, что находится за пределами этого блока*/
@@ -103,7 +110,7 @@ label, a{ /*при наведении на стрелки или переклю�
 }
 
 #controls{ /*положение блока всех управляющих элементов*/
-	margin: -25% 0 0 0;
+	margin: 0% 0 0 0;
 	width: 100%;
 	height: 50px;
 }
@@ -111,14 +118,14 @@ label, a{ /*при наведении на стрелки или переклю�
 #active label{ /*стиль отдельного переключателя*/
 	border-radius: 10px; /*скругление углов*/
 	display: inline-block; /*расположение в строку*/
-	width: 10px;
-	height: 10px;
-	background: #bbb;
+	width: 7px;
+	height: 7px;
+	background: var(--primary_color);
 	opacity: 0.5;
 }
 
 #active{ /*расположение блока с переключателями*/
-	margin: 5% 0 0;
+	margin: -50px 0 0;
 	text-align: center;
 }
 
@@ -129,8 +136,8 @@ label, a{ /*при наведении на стрелки или переклю�
 
 /*цвет активного лейбла при активации чекбокса*/
 #switch1:checked ~ #active label:nth-child(1){
-	background: var(--second_color);
-	border-color: var(--second_color) !important;
+	background: var(--color_3);
+	border-color: var(--color_3) !important;
 }
 
 #slides .image{ /*анимация пролистывания изображений*/
