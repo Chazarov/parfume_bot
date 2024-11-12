@@ -8,7 +8,6 @@
 
 {% block style_dependencies%}
     <link rel="stylesheet" href="{% static 'other/font-awesome/css/all.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/slider.css' %}">
     <link rel="stylesheet" href="{% static 'styles/main.css' %}">
     <link rel="stylesheet" href="{% static 'styles/table.css' %}">
     <link rel="stylesheet" href="{% static 'styles/catalog.css' %}">
@@ -24,6 +23,7 @@
                         <div class="instagram_circle_widget">
                             <div class="icon big">
                                 <img src="{{ brand.image.url}}" alt="Icon" class="small_image">
+                                <img class="border big" src="{% static 'img/border.png' %}">
                             </div>
                             <p class="title">{{brand.name}}</p>
                         </div>

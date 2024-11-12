@@ -82,14 +82,12 @@
                         </div>
 
                         {% if in_cart %}
-                            <!-- Если продукта нет в корзине, показываем кнопку добавления -->
                             <button class="shopping_cart_button right_block" type="button" onclick="window.location.href='{% url 'remove_product_in_cart' product_id=product.id %}'">
-                                <div class="icon-btn"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
+                                <div class="text-btn">В корзине</div>
                             </button>
                         {% else %}
-                            <!-- Если продукт в корзине, показываем другой значок -->
                             <button class="shopping_cart_button right_block" type="button" onclick="window.location.href='{% url 'add_product_in_cart' product_id=product.id %}'">
-                                <div class="icon-btn"><i class="fa fa-plus" aria-hidden="true"></i></div>
+                                <div class="text-btn">Добавить в корзину</div>
                             </button>
                         {% endif %}
                         
@@ -101,10 +99,9 @@
                 
                 
                 <div class = "block">
-                    <div class = "item">Возможный объем: {{in_cart}}</div><div class="value"> {{product.volumes}} </div>
+                    <div class = "item">Возможный объем:</div><div class="value"> {{product.volumes}} </div>
                     <div class = "item">Товарный вид:</div> <div class = "value"> {{product.type_of_product}} </div>
                     <div class = "item"> Страна-производитель: </div> <div class = "value">{{product.country}}</div>
-                    <div class = "item"><button class="btn items_color get_cost">Уточнить цену</button></div>
                 </div>
             </div>
             <div class="indent"></div>
