@@ -40,9 +40,9 @@ class ProductImageAdmin(admin.ModelAdmin):
 
 @admin.register(SliderImges)
 class SliderImagesAdmin(admin.ModelAdmin):
-    list_display = ('image',)
-    search_fields = ('image',)
-    list_filter = ('image',)
+    list_display = ('title',)
+    search_fields = ('title',)
+    list_filter = ('title',)
 
 
 @admin.register(Cart)
