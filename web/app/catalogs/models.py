@@ -77,7 +77,8 @@ class SliderImges(models.Model):
         verbose_name_plural = "Баннеры стартового слайдера"
 
     def __str__(self):
-        return self.image.name  # Возвращает имя файла изображения
+        return self.title
+    
 
 
 class Cart(models.Model):
