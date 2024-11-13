@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'styles/preloader.css' %}">
     {% block style_dependencies %}{% endblock %}
     <style>
         body {
@@ -18,34 +20,41 @@
 
 </head>
 <body>
+
+    <div id="preloader">
+        <img src="{% static 'img/logo.png' %}" alt="Loading..." id="logo">
+        <script src="{% static 'js/preloader.js' %} "></script>
+    </div>
     
-    {% block header %}
-    <div class="header">
-        <div class="inner_container">
-            <div class="main_title" id="debug">
-                {% block header_title%}
-                {% endblock %}
+    <div id="content" style="display: none;">
+        {% block header %}
+            <div class="header">
+                <div class="inner_container">
+                    <div class="main_title" id="debug">
+                        {% block header_title%}
+                        {% endblock %}
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    {% endblock %}
-
-    {% block fixed_objects %}
-    {% endblock %}
-
-    <div class="navigation_bar">
-
-        <button class="icon-btn" onclick="window.location.href='{% url 'start' %}'"><i class="fa fa-search"></i></button>
-        <button class="icon-btn" onclick="window.location.href='{% url 'start' %}'"><i class="fa fa-reply"></i></button>
-        <button class="icon-btn" onclick="window.location.href='{% url 'get_cart' %}'">{% if not request.cart.is_empty%}<span class="badge"> {{ request.cart.item_count_short }} </span>{% endif %}<i class="fa fa-shopping-cart"></i></button>
-        <button class="icon-btn" onclick="window.location.href='{% url 'get_help' %}'"><i class="fa fa-user"></i></button>
-    </div>
-    <div class="container">
-        
-        {% block content %}
         {% endblock %}
 
-        
+        {% block fixed_objects %}
+        {% endblock %}
+
+        <div class="navigation_bar">
+
+            <button class="icon-btn" onclick="window.location.href='{% url 'start' %}'"><i class="fa fa-search"></i></button>
+            <button class="icon-btn" onclick="window.location.href='{% url 'start' %}'"><i class="fa fa-reply"></i></button>
+            <button class="icon-btn" onclick="window.location.href='{% url 'get_cart' %}'">{% if not request.cart.is_empty%}<span class="badge"> {{ request.cart.item_count_short }} </span>{% endif %}<i class="fa fa-shopping-cart"></i></button>
+            <button class="icon-btn" onclick="window.location.href='{% url 'get_help' %}'"><i class="fa fa-user"></i></button>
+        </div>
+        <div class="container">
+            
+            {% block content %}
+            {% endblock %}
+
+            
+        <div>
     <div>
 
     {% block scripts_dependensies %}{% endblock %}

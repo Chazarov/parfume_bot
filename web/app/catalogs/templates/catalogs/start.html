@@ -7,7 +7,6 @@
 
 
 {% block style_dependencies %}
-    <link rel="stylesheet" href="{% static  'other/font-awesome/css/all.css' %}">
     <link rel="stylesheet" href="{% static 'styles/slider.css' %} ">
     <link rel="stylesheet" href="{% static 'styles/marqee.css' %} ">
     <link rel="stylesheet" href="{% static 'styles/main.css' %} ">
@@ -33,6 +32,10 @@
             }
         {% endfor %}
 
+        #slides .image{ 
+            width: {{ slides_count }}00%;
+        }
+
 
     </style>
 {% endblock %}
@@ -57,7 +60,7 @@
                                         <p><div class = "title">{{slide.title}}</div></p>
                                         <p><button onclick="window.location.href='{% url 'brand_products' brand_id=slide.brand.id %}'" class="inner_button">перейти →</button><img src="{{ slide.image.url }}"></p>
                                     </div>
-                                    </article>
+                                </article>
                             {% endfor %}
                         </div>
                     </div>

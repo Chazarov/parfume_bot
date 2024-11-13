@@ -6,7 +6,6 @@
 
 
 {% block style_dependencies %}
-    <link rel="stylesheet" href="{% static  'other/font-awesome/css/all.css' %}">
     <link rel="stylesheet" href="{% static 'styles/slider.css' %} ">
     <link rel="stylesheet" href="{% static 'styles/main.css' %} ">
     <link rel="stylesheet" href="{% static 'styles/product.css' %} ">
@@ -32,7 +31,10 @@
                 border-color: var(--second_color) !important;
             }
         {% endfor %}
-
+        
+        #slides .image{ 
+            width: {{ slides_count }}00%;
+        }
 
     </style>
 {% endblock %}

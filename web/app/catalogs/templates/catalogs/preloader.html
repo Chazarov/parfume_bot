@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preloader Example</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="preloader">
+        <img src="{% static 'img/logo.png' %}" alt="Loading..." id="logo">
+    </div>
+
+    <div id="content" style="display: none;">
+        <h1>Welcome to My Website!</h1>
+        <p>Content goes here...</p>
+    </div>
+
+    <script src="{% static 'js/preloader.js' %} "></script>
+</body>
+</html>

@@ -16,8 +16,9 @@
 
 /*устанавливает общий размер блока с изображениями*/
 #slides .image{ 
-	width: 500%;
 	margin-top: -10%;
+	display: flex;  /* Используем flexbox */
+    flex-wrap: nowrap;
 }
 
 .slide{ 
@@ -39,7 +40,7 @@
 	font-family: 'Futura';
 
 	height: 30px;
-	background-color: var(--color_3);
+	background-color: var(--button_color);
 	color: var(--primary_color)
 }
 .slide .inner_button:hover{
@@ -67,8 +68,11 @@
 	overflow: hidden;
 }
 
-article img{ /*размер изображений слайдера*/
-	width: 100%;
+article img{
+	height: 600px;
+    width: 100%;
+    object-fit: cover; 
+    object-position: center; 
 }
 
 #desktop:checked ~ #slider{ /*размер всего слайдера*/
