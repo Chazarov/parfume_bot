@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{% static 'styles/slider.css' %}">
     <link rel="stylesheet" href="{% static 'styles/main.css' %}">
     <link rel="stylesheet" href="{% static 'styles/catalog.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/product.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/products_list.css' %}">
 {% endblock %}
 
 {% block header_title %} 
@@ -18,28 +18,34 @@
 {% endblock %}
 
 {% block fixed_objects %}
-    <button class = "process_order" id="process_order">оформить заказ</button>
+    <button class = "process_order" id="process_order" data-action_url = "{% url 'process_order'}" data-redirect_url = "{% url 'bot'}">оформить заказ</button>
 {% endblock %}
 
 
 {% block content%}
-    {% for product in products %}
+    {% for item in cart_items %}
             
             
 
             <div class="product_card big">
                 
                 <div class = "two_parts_layer">
-                    <button class="btn" onclick="window.location.href='{% url 'product' product_id=product.id %}'"></button>
-                    <button class="shopping_cart_button" type="button" onclick="window.location.href='{% url 'remove_product_in_cart' product_id=product.id %}'">
-                        <div class="icon-btn"><i class="fa fa-minus" aria-hidden="true"></i></div>
+                    <button class="btn" data-action="redirect" data-redirect_url="{% url 'product' product_id=item.product.id %}"></button>
+
+                    <button id = "cart_button_{{item.product.id}}" class="shopping_cart_button right_block" type="button" 
+                    data-product_id="{{item.product.id}}"
+                    data-in_cart_content = "<div class='icon-btn'><i class='fa fa-minus' aria-hidden='true'></i></div>"
+                    data-not_in_cart_content = "<div class='icon-btn'><i class='fa fa-plus' aria-hidden='true'></i></div>" 
+                    data-add_action_url = "{% url 'add_to_cart_or_delete' %}"
+                    data-check_action_url = "{% url 'check_in_cart' %}">
+                            ...
                     </button>
                 </div>
                 
                 
                 <div class = "image_container">
-                    {% if product.images.all %}
-                        <img src="{{ product.images.all.0.image.url }}" alt="Товар" class="product-image">
+                    {% if item.product.images.all %}
+                        <img src="{{ item.product.images.all.0.image.url }}" alt="Товар" class="product-image">
                     {% else %}
                         <img src="{% static 'img/default.jpg' %}" alt="Нет изображения" class="product-image">
                     {% endif %}
@@ -47,10 +53,10 @@
                     
                 <div class="product-details">
                     <div class="top_part">
-                        <p class="product-title">{{product.name}}</p>
-                        <p class="product-description">{{product.description}}</p>                    
+                        <p class="product-title">{{item.product.name}}</p>
+                        <p class="product-description">{{item.product.description}}</p>                    
                     </div>
-                    <div class="product-price">{{ product.price }} ₽</div>
+                    <div class="product-price">{{ item.price_item.price }} ₽</div>
                 </div>
             </div>
     {% endfor %}
@@ -58,7 +64,10 @@
 
 
 
-{% block scripts_dependensies %} <script src="{% static 'js/telegram_integration.js' %} "></script> {% endblock %}
+{% block scripts_dependensies %} 
+    <script src="{% static 'js/telegram_integration.js' %} "></script> 
+    <script src="{% static 'js/cart_actions.js' %} "></script>
+{% endblock %}
 
 
         

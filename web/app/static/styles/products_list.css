@@ -1,0 +1,209 @@
+.product_card.big{
+    height: 11em;
+}
+
+
+.product_card {
+    position: relative;
+    display: block;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    height: 8.5em;
+    background-color: var(--primary_color);
+    border-radius: 3px;
+
+    margin-top: 10px;
+    margin-left: 7px;
+    margin-right: 7px;
+
+    
+    box-shadow: 1px 0px 10px 10px rgba(71, 69, 64, 0.158);
+}
+
+
+
+.image_container{
+    width: 100px; /* Ширина изображения */
+    height: 100%;
+    border-radius: 3px 0 0 3px; /* Закругление углов слева */
+    overflow: hidden;
+}
+
+.image_container .big{
+    height: 9.2em;
+}
+
+
+.product-image {
+    height: 100%; /* Ширина изображения */
+    object-fit: contain;
+    border-radius: 3px 0 0 3px; /* Закругление углов слева */
+
+}
+
+.product-details {
+    flex-grow: 1; /* Занимает доступное пространство */
+    padding: 0 5px; /* Отступы справа и слева */
+
+    .top_part{
+        position: absolute;
+        top: 0;
+        left: 100px;
+        padding: 10px;
+    }
+}
+
+
+
+.product-title {
+    margin: 0;
+    font-size: 1.1em;
+    font-family: 'Futura';
+    font-weight: 100;
+}
+
+.product-description {
+    margin: 5px 0 0;
+    padding-right: 30px;
+    font-family: 'Gotham';
+    font-size: 0.8em;
+    color: #666; /* Цвет описания */
+}
+
+.product-price {
+    font-family: 'Futura';
+    font-weight: 100;
+    position: absolute;
+    font-size: 1em; /* Размер шрифта цены */
+    color: #333; /* Цвет цены */
+
+
+    text-align: right; /* Выравнивание по правому краю */
+    right: 0;
+    bottom: 0;
+    padding-right: 0.8em;
+    padding-bottom: 0.8em;
+}
+
+
+
+
+.square-btn {
+    width: 50px;
+    height: 50px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    align-items: center;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.square-btn:hover {
+    background-color: var(--middle_color);
+}
+
+.shopping_cart_button{
+    z-index: 100;
+    cursor: pointer;
+    display: flex;
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center;     /* Центрирование по вертикали */
+
+    .icon-btn{
+        margin-left: 10px;
+        display: flex;
+        border-radius: 50%;
+        justify-content: center; /* Центрирование по горизонтали */
+        align-items: center;     /* Центрирование по вертикали */
+        background-color: var(--buttons_color);
+        width: 40px;
+        height: 40px;
+
+    }
+
+    .icon-btn:hover{
+        border-radius: 50%;
+        background-color: var(--middle_color);
+    }
+
+    .text-btn{
+        padding: 15px;
+        display: flex;
+        justify-content: center; /* Центрирование по горизонтали */
+        align-items: center;     /* Центрирование по вертикали */
+        height: 20px;
+        width: 80px;
+
+        font-family: "Gotham";
+        font-size: 13px;
+        color: var(--primary_color);
+        background-color: var(--button_color);
+        border-radius: 1px;
+    }
+    
+    i {
+        font-size: 1.5rem;
+        border-radius: 5px;
+    }
+
+}
+
+
+.two_parts_layer {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+}
+
+.two_button_layer button:first-child {
+    flex: 4;
+}
+
+.two_button_layer button:last-child {
+    flex: 1;
+}
+
+.two_button_layer div:first-child {
+    flex: 4;
+}
+
+.two_button_layer div:last-child {
+    flex: 1;
+}
+
+
+button.process_order{
+    z-index: 200;
+    position: fixed;
+    bottom: 70px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    width: 9em;
+    height: 2em;
+
+    left: 50%;
+    transform: translateX(-50%); 
+
+    font-family: "futuris regular";
+    font-size: 22px;
+    font-weight: 100;
+    border-radius: 1px;
+    background-color: var(--button_color);
+    color: var(--primary_color);
+    cursor: pointer;
+}
+
+button.process_order:hover{
+    background-color: var(--middle_color);
+}

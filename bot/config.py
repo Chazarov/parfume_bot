@@ -13,7 +13,7 @@ def bo(s:str, default = False):
 
 class Configs:
 
-    WEB_APP_URL:str = "https://08c2-95-26-131-139.ngrok-free.app/"
+    WEB_APP_URL:str = "https://3eac-95-26-124-223.ngrok-free.app/"
     BOT_TOKEN: str = os.getenv("BOT_TOKEN")
     ADMIN_ID: int = 6768853571
 

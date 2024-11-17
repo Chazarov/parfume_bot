@@ -3,24 +3,31 @@ from catalogs import views
 
 urlpatterns = [
     path('', views.start_page, name = "start"),
-    path('category/<int:category_id>/', views.brands_page, name = "brands"),
-    path('category/<int:category_id>/brand/<int:brand_id>/', views.products_page, name = "products"),
+    path('category/<int:category_id>/', views.brands_catalog_by_category, name = "brands"),
+    path('category/<int:category_id>/brand/<int:brand_id>/', views.product_by_brend_and_category, name = "products"),
+    path('cart', views.cart_page, name='cart'),
     path('<int:product_id>/', views.product_page, name = "product"),
-    path('brand/<int:brand_id>/', views.brand_products, name = "brand_products"),
+    path('brand/<int:brand_id>/', views.products_by_brend, name = "brand_products"),
+    path('help', views.get_help, name='get_help'),
+    path('tgbot', views.to_bot, name = "bot")
 ]
 
 
 
 
 requests = [
-    path('api/add_product/<int:product_id>', views.add_product, name='add_product_in_cart'),
-    path('api/remove_product/<int:product_id>', views.remove_product, name='remove_product_in_cart'),
-    path('api/cart', views.get_cart, name='get_cart'),
-    path('api/help', views.get_help, name='get_help'),
-    path('api/process_order', views.process_order, name='process_order'),
+    path('api/cart/counter', views.get_cart_counter, name='get_cart_counter'),
+    path('api/process-order', views.process_order, name='process_order'),
+]
+
+post = [
+    path('api/cart/add-or-delete', views.add_to_cart_or_delete_in_cart, name='add_to_cart_or_delete'),
+    path('api/cart/check', views.product_is_in_cart, name='check_in_cart'),
+    path('api/product/price-items/get-price', views.get_price, name='get_price'),
 ]
 
 
 urlpatterns += requests
+urlpatterns += post
 
 

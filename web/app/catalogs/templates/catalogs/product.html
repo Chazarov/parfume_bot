@@ -1,16 +1,16 @@
 {% extends 'catalogs/base.html' %}
 {% load static %}
 
-{% block title %} Main page {% endblock %}
+{% block title %} {{product.name}} {% endblock %}
 
 
 
 {% block style_dependencies %}
-    <link rel="stylesheet" href="{% static 'styles/slider.css' %} ">
+    
     <link rel="stylesheet" href="{% static 'styles/main.css' %} ">
-    <link rel="stylesheet" href="{% static 'styles/product.css' %} ">
+    <link rel="stylesheet" href="{% static 'styles/products_list.css' %} ">
     <link rel="stylesheet" href="{% static 'styles/product_item.css' %} ">
-
+    <link rel="stylesheet" href="{% static 'styles/slider.css' %} ">
     <style>
         {% for i in range_images %}
             {% if forloop.first %}
@@ -27,13 +27,13 @@
 
         {% for i in range_images %}
             #switch{{ forloop.counter }}:checked ~ #active label:nth-child({{forloop.counter}}){
-                background: var(--second_color);
-                border-color: var(--second_color) !important;
+                background: var(--color_3_transpanent);
+                border-color: var(--color_3_transpanent) !important;
             }
         {% endfor %}
         
         #slides .image{ 
-            width: {{ slides_count }}00%;
+            width: {{ images_count }}00%;
         }
 
     </style>
@@ -47,7 +47,10 @@
     <div class="all">
         <input checked type="radio" name="respond" id="desktop"/>
             <article id="slider">
-                
+                <div class="center-buttons">
+                    <button class="arrow left" id = "prev_button"><img src="{% static 'img/prev.png' %}"></button>
+                    <button class="arrow right" id = "next_button"><img src="{% static 'img/next.png' %}"></button>
+                </div>
                 {% for i in range_images %}
                     <input {% if forloop.first %}checked{% endif %} type="radio" name="slider" id="switch{{forloop.counter}}" >
                 {% endfor %}
@@ -55,7 +58,11 @@
                     <div id="overflow">
                         <div class="image">
                             {% for image in images %}
-                                <article><img src="{{ image.image.url }}"></article>
+                                <article>
+                                    <div class="slide">
+                                        <p><img src="{{ image.image.url }}"></p>
+                                    </div>
+                                </article>
                             {% endfor %}
                         </div>
                     </div>
@@ -66,10 +73,7 @@
                     {% endfor %}
                     
                 </div>
-                <div class="center-buttons">
-                    <button class="square-btn" id = "prev_button"><img src="{% static 'img/prev.png' %}"></button>
-                    <button class="square-btn" id = "next_button"><img src="{% static 'img/next.png' %}"></button>
-                </div>
+                
             </article>
 
     </div>
@@ -80,18 +84,19 @@
                     <div class = "two_parts_layer">
                         <div class="left_block">
                             <div class = "name">{{product.name}}</div>
-                            <div class = "price_value"> {{product.price}} ₽</div>
+                            <div class = "price_value"> <div id = "price" data-action_url = "{% url 'get_price' %}"></div>₽</div>
                         </div>
 
-                        {% if in_cart %}
-                            <button class="shopping_cart_button right_block" type="button" onclick="window.location.href='{% url 'remove_product_in_cart' product_id=product.id %}'">
-                                <div class="text-btn">В корзине</div>
-                            </button>
-                        {% else %}
-                            <button class="shopping_cart_button right_block" type="button" onclick="window.location.href='{% url 'add_product_in_cart' product_id=product.id %}'">
-                                <div class="text-btn">Добавить в корзину</div>
-                            </button>
-                        {% endif %}
+                        <button class="shopping_cart_button right_block" type="button" 
+                        
+                        id="cart_button"
+                        data-product_id="{{product.id}}"
+                        data-in_cart_content = "<div class='text-btn'>В корзине</div>"
+                        data-not_in_cart_content = "<div class='text-btn'>Добавить в корзину</div>"
+                        data-add_action_url = "{% url 'add_to_cart_or_delete' %}"
+                        data-check_action_url = "{% url 'check_in_cart' %}">
+                            ...
+                        </button>
                         
                     </div>
                 </div>
@@ -101,9 +106,20 @@
                 
                 
                 <div class = "block">
-                    <div class = "item">Возможный объем:</div><div class="value"> {{product.volumes}} </div>
-                    <div class = "item">Товарный вид:</div> <div class = "value"> {{product.type_of_product}} </div>
-                    <div class = "item"> Страна-производитель: </div> <div class = "value">{{product.country}}</div>
+                    <div class="cube_volumes">
+                        {% for item in product.price_volume_items.all %}
+                            <div class="item">
+                                <input {% if forloop.first %}checked{% endif %} type="radio" id="option{{ item.id }}" name="volume" value="{{ item.id }}"/>
+                                <label for="option{{ item.id }}">{{ item.volume }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class = "parametrs_space_between">
+                        <div class = "item">Товарный вид:</div> <div class = "value"> {{product.type_of_product}} </div>
+                        <div class = "item"> Страна-производитель: </div> <div class = "value">{{product.country}}</div>
+                    </div>
+                    
                 </div>
             </div>
             <div class="indent"></div>
@@ -113,6 +129,8 @@
 {% block scripts_dependensies %}
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="{% static 'js/navigation_buttons.js' %} "></script>
+    <script src="{% static 'js/cart_actions.js' %} "></script>
+    <script src="{% static 'js/volumes_radio.js' %} "></script>
 {% endblock %}
 
 

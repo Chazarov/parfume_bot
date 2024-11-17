@@ -1,5 +1,7 @@
 from django.contrib import admin
-from catalogs.models import Category, Brand, Product, SliderImges, Cart, CartItem, ProductImage
+from catalogs.models import ProductType ,Category, Brand, Product, SliderImges, Cart, CartItem, ProductImage, PriceVolumeItem
+
+
 
 
 
@@ -18,24 +20,32 @@ class BrandAdmin(admin.ModelAdmin):
 
 
 
+
+
 class ProductImageInline(admin.TabularInline):
     model = ProductImage
     extra = 1 
+
+
+class ProductVolumeItemInline(admin.TabularInline):
+    model = PriceVolumeItem
+    extra = 1
+
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    inlines = [ProductImageInline]
+    inlines = [ProductImageInline, ProductVolumeItemInline]
     list_display = ('name',)
     search_fields = ('name',)
     list_filter = ('name',)
     
-@admin.register(ProductImage)
-class ProductImageAdmin(admin.ModelAdmin):
-    list_display = ('product',)
-    search_fields = ('product',)
-    list_filter = ('product',)
 
 
-
+@admin.register(ProductType)
+class Type(admin.ModelAdmin):
+    list_display = ('name',)
+    search_fields = ('name',)
+    list_filter = ('name',)
 
 
 @admin.register(SliderImges)
@@ -45,11 +55,6 @@ class SliderImagesAdmin(admin.ModelAdmin):
     list_filter = ('title',)
 
 
-@admin.register(Cart)
-class CartAdmin(admin.ModelAdmin):
-    list_display = ('user',)
-    search_fields = ('user',)
-    list_filter = ('user',)
 
 
 @admin.register(CartItem)
@@ -57,6 +62,20 @@ class CartItemAdmin(admin.ModelAdmin):
     list_display = ('product',)
     search_fields = ('product',)
     list_filter = ('product',)
+
+class CartItemInline(admin.TabularInline):
+    model = CartItem
+    extra = 1
+
+
+@admin.register(Cart)
+class CartAdmin(admin.ModelAdmin):
+    inlines = [CartItemInline]
+    list_display = ('user',)
+    search_fields = ('user',)
+    list_filter = ('user',)
+
+
 
 
 

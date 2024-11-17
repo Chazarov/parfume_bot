@@ -1,14 +1,15 @@
 import requests
+from typing import List
+import json
 
 from django.shortcuts import render
 from django.core.handlers.wsgi import WSGIRequest
-from catalogs.models import Category, Brand, Product, SliderImges, ProductImage, Cart, CartItem
+from catalogs.models import Category, Brand, Product, SliderImges, ProductImage, Cart, CartItem, PriceVolumeItem
 from django.http import HttpResponseBadRequest, HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404
 
 
 def start_page(request):
-
     categories = Category.objects.all()
     slides = SliderImges.objects.all()
     slides_count = len(slides)
@@ -26,71 +27,79 @@ def start_page(request):
 
 
 
-def brands_page(request, category_id):
-
+def category_catalogs(request, category_id):
     category = Category.objects.get(id = category_id)
     if(category.prime_category):
-        return products_page(request, None, category_id, prime_category=True)
+        return product_by_category(request, None, category_id, prime_category=True)
 
-    brands = Brand.objects.all()
-
-    return render(request, 'catalogs/brand_catalog.html', 
-    {
-        "brands":brands, 
-        "category_id":category_id,
-    })
+    
 
 
 
-def products_page(request, brand_id, category_id, prime_category:bool=False):
+def brands_catalog_by_category(request, category_id):
+    brands = Brand.objects.filter(product__category_id=category_id).distinct()
+    if(brands.exists()):
+        return render(request, 'catalogs/brand_catalog.html', 
+        {
+            "brands": brands,
+            "category_id": category_id,
+        })
+    else:
+        return product_by_category(request, category_id=category_id)
 
 
-    category = None
-    brand = None
 
+
+
+
+def product_by_category(request, category_id):
     category = Category.objects.get(id=category_id)
     cart_items = CartItem.objects.filter(cart=request.cart)
     products_in_cart = [item.product.id for item in cart_items]
-
-
-    if(not prime_category):
-        products = Product.objects.filter(brand__id = brand_id).filter(category__id = category_id)
-        brand = Brand.objects.get(id = brand_id)
-    else:
-        products = Product.objects.filter(category__id = category_id)
-
-
+    products = Product.objects.filter(category__id = category_id)
+    
     return render(request, 'catalogs/product_catalog.html',
     {
         "products":products,
-        "category":category,
-        "band":brand,
-        "primary":prime_category,
+        "title":category.name,
         "products_in_cart":products_in_cart
     })
 
 
-def brand_products(request, brand_id):
-     
+
+def products_by_brend(request, brand_id):
     products = Product.objects.filter(brand__id = brand_id)
     brand = Brand.objects.get(id = brand_id)
-    prime_category = False
     cart_items = CartItem.objects.filter(cart=request.cart)
     products_in_cart = [item.product.id for item in cart_items]
 
     return render(request, 'catalogs/product_catalog.html',
     {
         "products":products,
-        "category":None,
-        "band":brand,
-        "primary":prime_category,
+        "title":brand.name,
+        "products_in_cart":products_in_cart,
+    })
+
+
+def product_by_brend_and_category(request,  brand_id, category_id):
+    products = Product.objects.filter(brand__id = brand_id).filter(category__id = category_id)
+    brand = Brand.objects.get(id = brand_id)
+    category = Category.objects.get(id = category_id)
+
+    
+    cart_items = CartItem.objects.filter(cart=request.cart)
+    products_in_cart = [item.product.id for item in cart_items]
+
+    return render(request, 'catalogs/product_catalog.html',
+    {
+        "products":products,
+        "title":f"{category.name} {brand.name}",
         "products_in_cart":products_in_cart,
     })
 
 
 
 def product_page(request:WSGIRequest, product_id):
-    
     product = Product.objects.get(id = product_id)
     images = product.images.all()
     images_count = len(images)
@@ -108,69 +117,155 @@ def product_page(request:WSGIRequest, product_id):
     })
 
 
-def add_product(request: WSGIRequest, product_id):
-    product = Product.objects.get(id=product_id)
-    
-    if request.method == 'GET':
-        # Получаем или создаем объект CartItem
-        cart_item, created = CartItem.objects.get_or_create(product=product, cart=request.cart)
+def cart_page(request):
+    cart_items = list(request.cart.cartitem_set.all())
+    print(cart_items)
+    return render(request, 'catalogs/cart_list.html',
+    {
+        "cart_items":cart_items,
+    })
+
+
+
+def add_to_cart_or_delete_in_cart(request: WSGIRequest):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            product_id = data.get('product_id')
+            volume_item_id = data.get('volume_item_id')
+
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON'}, status=400)
         
-        cart_item.save()
-        
-         # Перенаправляем на ту же страницу
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))  # Перенаправление на предыдущую страницу
-    else:
-        return HttpResponseBadRequest("Invalid request method")
 
-
-def remove_product(request: WSGIRequest, product_id):
-
-    product = get_object_or_404(Product, id=product_id)
-    print(request)
-    print(request.method)
-    print(request.GET)
-
-    if request.method == 'GET':
-        # Ищем CartItem, соответствующий продукту и корзине
-        cart_item = CartItem.objects.filter(cart=request.cart, product=product).first()
-        if cart_item:
-            cart_item.delete()  # Удаляем товар из корзины
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))  # Перенаправление на предыдущую страницу
+        cart = request.cart
+        product = Product.objects.get(id=product_id)
+        if(not volume_item_id):
+            cart_items = CartItem.objects.filter(cart = cart, product=product)
+            if(cart_items.exists()):
+                cart_items.delete()
+                print("product DELETE in cart without price_item!")
+                return JsonResponse({'in_cart': False}, status=200)
+            else:
+                price_volume_item = PriceVolumeItem.objects.filter(product=product).first()
+                CartItem.objects.create(cart = cart, product = product, price_item = price_volume_item)
+                print("product ADD in cart without price_item!")
+                return JsonResponse({'in_cart': True}, status=200)
         else:
-            return HttpResponseBadRequest("Product not found in cart")
+            price_volume_item = PriceVolumeItem.objects.get(id = volume_item_id)
+
+            try:
+                cart_item = CartItem.objects.get(cart = cart, product = product, price_item = price_volume_item)
+                cart_item.delete()
+                print("product with price_item was DELETE!!!")
+                return JsonResponse({'in_cart': False}, status=200)
+            except CartItem.DoesNotExist:
+                CartItem.objects.create(cart = cart, product = product, price_item = price_volume_item)
+                print("product with price_item was CREATE!!!")
+                return JsonResponse({'in_cart': True}, status=200)
+
     else:
-        return HttpResponseBadRequest("Invalid request method")
-    
+        return JsonResponse({'error': 'Invailid request method'}, status=400)
 
 
 
-def process_order(request:WSGIRequest):
-    
-    print("❗❗❗")
-    print(request)
-    bot_api = 'http://localhost:8080/cart'
-    
-    cart:Cart = request.cart 
-    
-    cart_items = []
-    for item in cart.items.all():
-        item: Product
 
-        cart_items.append({
-            'product_id': item.id,
-            'name': item.name,
-            'price': item.price
-        })
+def product_is_in_cart(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            product_id = data.get('product_id')
+            volume_item_id = data.get('volume_item_id')
+
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON'}, status=400)
+        
+
+        cart = request.cart
+        product = Product.objects.get(id=product_id)
+        if(not volume_item_id):
+            cart_items = CartItem.objects.filter(cart = cart, product=product)
+            if(cart_items.exists()):
+                print(True)
+                return JsonResponse({'in_cart': True}, status=200)
+            else:
+                print(False)
+                return JsonResponse({'in_cart': False}, status=200)
+        else:
+            price_volume_item = PriceVolumeItem.objects.get(id = volume_item_id)
+            try:
+                print(True)
+                CartItem.objects.get(cart = cart, product = product, price_item = price_volume_item)
+                return JsonResponse({'in_cart': True}, status=200)
+            except CartItem.DoesNotExist:
+                print(False)
+                return JsonResponse({'in_cart': False}, status=200)
+
+    else:
+        return JsonResponse({'error': 'Invailid request method'}, status=400)
+
+
+
+def get_cart_counter(request):
+    cart_items = list(request.cart.cartitem_set.all())
+    counter = len(cart_items)
+    return JsonResponse({'counter': counter})
+
+
+def get_price(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            volume_item_id = data.get('volume_item_id')
+
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON'}, status=400)
+        
+
+        try:
+            price_volume_item = PriceVolumeItem.objects.get(id = volume_item_id)
+            return JsonResponse({'price': price_volume_item.price}, status=200)
+        except: 
+            return JsonResponse({'error': 'Not Found price item'}, status=405)
+
+    else:
+        return JsonResponse({'error': 'Invailid request method'}, status=400)
+
+
+
+def get_help(request):
+    help_url = 'https://t.me/ZAM_Andrew'
     
+    return HttpResponseRedirect(help_url)
+
+def to_bot(request):
+    bot_url = "https://t.me/C000lBot"
+    
+    return HttpResponseRedirect(bot_url)
+
+
+
+def process_order(request: WSGIRequest):
+
+    bot_api = 'http://localhost:8080/cart' #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    
+    cart: Cart = request.cart
     telegram_id = request.GET.get('tgUserId')  
-    username = request.GET.get('username') 
+    username = request.GET.get('username')
+
+
+    cart_items = []
+    for cart_item in CartItem.objects.filter(cart=cart):
+        cart_items.append({
+            'product_id': cart_item.product.id,
+            'name': cart_item.product.name,
+            'price': cart_item.price_item.price,
+            'volume': cart_item.price_item.volume,
+        })
+
     
     if not telegram_id:
         return JsonResponse({'error': 'Telegram ID not provided'}, status=400)
-    
-    print("❗❗❗")
-    print(request.body)
-    print(request)
 
     response = requests.post(bot_api, json={
         'telegram_id': telegram_id,
@@ -178,26 +273,8 @@ def process_order(request:WSGIRequest):
         'cart': cart_items
     })
     
-    # if response.status_code == 200:
-    print("❤️❤️❤️")
-    return JsonResponse({'status': 'success'})
-    # else:
-    #     return JsonResponse({'status': 'failure', 'details': response.text}, status=response.status_code)
-
-def get_cart(request):
-
-    products = request.cart.items.all()
-
-
-    return render(request, 'catalogs/cart_list.html',
-    {
-        "products":products,
-    })
+    if response.status_code == 200:
+        return JsonResponse({'status': 'success'})
+    else:
+        return JsonResponse({'status': 'failure', 'details': response.text}, status=response.status_code)
     
-
-def get_help(request):
-    
-
-    help_url = 'https://t.me/ZAM_Andrew'
-    
-    return HttpResponseRedirect(help_url)

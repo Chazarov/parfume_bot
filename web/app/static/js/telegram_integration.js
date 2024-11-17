@@ -3,8 +3,12 @@ tg.expand();
 
 console.log("Connect")
 
+function getCSRFToken() {
+    return document.querySelector('[name=csrfmiddlewaretoken]').value;
+}
 
-const BOT_LOCATION = "https://t.me/C000lBot"
+
+// const BOT_LOCATION = "https://t.me/C000lBot"
 
 
 function sendCartToServer() {
@@ -14,35 +18,34 @@ function sendCartToServer() {
 
         const userId = tg.initDataUnsafe.user.id;
         const username = tg.initDataUnsafe.user.username
-
-
-        const serverUrl = '/api/process_order'; 
+        const actionUrl = buttonElement.getAttribute('data-action_url');
+        const redirect_to = buttonElement.getAttribute('data-redirect_url')
 
         const params = new URLSearchParams({
             tgUserId: userId,
             username: username,
         });
 
-        fetch(`${serverUrl}?${params.toString()}`, {
+        fetch(`${actionUrl}?${params.toString()}`, {
             method: 'GET',
         })
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
 
-                console.log('Данные успешно отправлены');
-                window.location.href=BOT_LOCATION
+                alert('Благодарим за заказ! В ближайшее время с вами свяжется наш оператор.');
+                window.location.href=redirect_to
             } else {
                 console.error('Ошибка при отправке данных:', data.details);
             }
         })
         .catch(error => {
-            console.error('Ошибка сети:', error);
+            alert('Ошибка сети:', error);
         });
 
         
     } else {
-        console.error('Telegram WebApp API не доступен');
+        alert('Telegram не доступен');
     }
 }
 

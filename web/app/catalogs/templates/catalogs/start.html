@@ -27,8 +27,8 @@
 
         {% for i in range_slides %}
             #switch{{ forloop.counter }}:checked ~ #active label:nth-child({{forloop.counter}}){
-                background: var(--color_3);
-                border-color: var(--color_3) !important;
+                background: var(--color_3_transpanent);
+                border-color: var(--color_3_transpanent) !important;
             }
         {% endfor %}
 

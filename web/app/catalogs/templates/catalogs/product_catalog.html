@@ -10,15 +10,11 @@
     <link rel="stylesheet" href="{% static 'styles/slider.css' %}">
     <link rel="stylesheet" href="{% static 'styles/main.css' %}">
     <link rel="stylesheet" href="{% static 'styles/catalog.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/product.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/products_list.css' %}">
 {% endblock %}
 
 {% block header_title %} 
-    {% if primary  %}
-        <p> {{ category.name }}</p>
-    {% else %}
-        <p> {{ brand.name }}</p>
-    {% endif %}
+    <p>{{title}}</p>
 {% endblock %}
 
 
@@ -30,18 +26,16 @@
             <div class="product_card">
                 
                 <div class = "two_parts_layer">
-                    <button class="btn" onclick="window.location.href='{% url 'product' product_id=product.id %}'"></button>
-                    {% if product.id in products_in_cart %}
-                        <!-- Если продукта нет в корзине, показываем кнопку добавления -->
-                        <button class="shopping_cart_button" type="button" onclick="window.location.href='{% url 'remove_product_in_cart' product_id=product.id %}'">
-                            <div class="icon-btn"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
-                        </button>
-                    {% else %}
-                        <!-- Если продукт в корзине, показываем другой значок -->
-                        <button class="shopping_cart_button" type="button" onclick="window.location.href='{% url 'add_product_in_cart' product_id=product.id %}'">
-                            <div class="icon-btn"><i class="fa fa-plus" aria-hidden="true"></i></div>
-                        </button>
-                    {% endif %}
+                    <button class="btn" data-action="redirect" data-redirect_url="{% url 'product' product_id=product.id %}"></button>
+
+                    <button id = "cart_button_{{product.id}}" class="shopping_cart_button right_block" type="button" 
+                    data-product_id="{{product.id}}"
+                    data-in_cart_content = "<div class='icon-btn'><i class='fa fa-minus' aria-hidden='true'></i></div>"
+                    data-not_in_cart_content = "<div class='icon-btn'><i class='fa fa-plus' aria-hidden='true'></i></div>" 
+                    data-add_action_url = "{% url 'add_to_cart_or_delete' %}"
+                    data-check_action_url = "{% url 'check_in_cart' %}">
+                            ...
+                    </button>
                 </div>
                 
                 
@@ -58,7 +52,7 @@
                         <p class="product-title">{{product.name}}</p>
                         <p class="product-description">{{product.description}}</p>                    
                     </div>
-                    <div class="product-price">{{ product.price }} ₽</div>
+                    <div class="product-price">от {{ product.price_volume_items.all.0.price }} ₽</div>
                 </div>
             </div>
     {% endfor %}
@@ -66,7 +60,10 @@
 
 
 
-{% block scripts_dependensies %} {% endblock %}
+{% block scripts_dependensies %} 
+    <script src="{% static 'js/cart.js' %} "></script>
+    <script src="{% static 'js/cart_actions.js' %} "></script>
+{% endblock %}
 
 
         

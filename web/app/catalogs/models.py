@@ -6,7 +6,7 @@ from django.db import models
 class Category(models.Model):
     name = models.CharField("Название", max_length=55)
     description = models.TextField("Описание")
-    image = models.ImageField(upload_to='product_images/', null=True, blank=True)
+    image = models.ImageField(upload_to='category_images/', null=True, blank=True)
     prime_category = models.BooleanField("Локальная категория", default=False)
 
     class Meta:
@@ -21,7 +21,7 @@ class Category(models.Model):
 class Brand(models.Model):
     name = models.CharField("Название", max_length=55)
     description = models.TextField("Описание")
-    image = models.ImageField(upload_to='product_images/', null=True, blank=True)
+    image = models.ImageField(upload_to='brand_images/', null=True, blank=True)
 
     class Meta:
         verbose_name_plural = "Бренды"
@@ -31,27 +31,38 @@ class Brand(models.Model):
 
 
 
+
+class ProductType(models.Model):
+    name = models.CharField("Тип продукта", max_length=25)
+
+    def __str__(self):
+        return self.name
+
     
 
 class Product(models.Model):
     name = models.CharField("Название", max_length=55)
-    price = models.IntegerField("Цена", default=0)
-    description = models.TextField("Описание")
-    brand = models.ForeignKey(Brand, null=True, on_delete=models.SET_NULL)
+    description = models.TextField("Описание", blank=True)
+    brand = models.ForeignKey(Brand, null=True, on_delete=models.SET_NULL, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     country = models.CharField("Страна производитель", default="неизвестно", max_length=55)
-    volumes = models.CharField("Объемы",  max_length=22)
-    type_of_product = models.CharField("Вид товара",  max_length=22)
+    type_of_product = models.ForeignKey(ProductType, on_delete=models.CASCADE, related_name="product_type")
 
     class Meta:
         verbose_name_plural = "Товары"
 
     def __str__(self):
-        return self.name
+        return self.name    
     
 
+class PriceVolumeItem(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="price_volume_items")
+    price = models.IntegerField("Цена", default=0)
+    volume = models.IntegerField("Объем", default=0)
 
-    
+    def __str__(self):
+        return f"{self.product} {self.volume}"  
+
 
 
 class ProductImage(models.Model):
@@ -83,7 +94,6 @@ class SliderImges(models.Model):
 
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    items = models.ManyToManyField(Product, through='CartItem')
 
     class Meta:
         verbose_name_plural = "Корзины"
@@ -105,6 +115,9 @@ class Cart(models.Model):
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    price_item = models.ForeignKey(PriceVolumeItem, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name_plural = "Позиции корзины"
+        unique_together = ('cart', 'product', 'price_item')  # Уникальность
+
