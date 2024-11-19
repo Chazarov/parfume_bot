@@ -110,7 +110,7 @@
                         {% for item in product.price_volume_items.all %}
                             <div class="item">
                                 <input {% if forloop.first %}checked{% endif %} type="radio" id="option{{ item.id }}" name="volume" value="{{ item.id }}"/>
-                                <label for="option{{ item.id }}">{{ item.volume }}</label>
+                                <label for="option{{ item.id }}">{{ item.volume }} ml</label>
                             </div>
                         {% endfor %}
                     </div>

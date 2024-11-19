@@ -76,7 +76,6 @@ function update_indicator(buttonElement){
     .then(data => {
         var in_cart = data.in_cart
 
-        console.log("❗❗❗")
         console.log(in_cart)
         if(in_cart){
             buttonElement.innerHTML = in_cart_content

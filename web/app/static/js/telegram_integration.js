@@ -1,6 +1,3 @@
-const tg = window.Telegram.WebApp;
-tg.expand();
-
 console.log("Connect")
 
 function getCSRFToken() {
@@ -11,10 +8,10 @@ function getCSRFToken() {
 // const BOT_LOCATION = "https://t.me/C000lBot"
 
 
-function sendCartToServer() {
-    if (window.Telegram.WebApp) {
+function sendCartToServer(buttonElement) {
+    try {
+        const tg = window.Telegram.WebApp; 
 
-        
 
         const userId = tg.initDataUnsafe.user.id;
         const username = tg.initDataUnsafe.user.username
@@ -26,6 +23,8 @@ function sendCartToServer() {
             username: username,
         });
 
+
+
         fetch(`${actionUrl}?${params.toString()}`, {
             method: 'GET',
         })
@@ -36,17 +35,23 @@ function sendCartToServer() {
                 alert('Благодарим за заказ! В ближайшее время с вами свяжется наш оператор.');
                 window.location.href=redirect_to
             } else {
+                alert('Ошибка при отправке данных:' + data.details)
                 console.error('Ошибка при отправке данных:', data.details);
             }
         })
         .catch(error => {
-            alert('Ошибка сети:', error);
+            alert('Ошибка сети:' + actionUrl + " : " + error);
         });
 
-        
-    } else {
-        alert('Telegram не доступен');
+    } catch (error) {
+        alert("Telegram не доступен: " + error);
+        console.error("Telegram не доступен: ", error);
     }
+    
+
+    
+
+    
 }
 
 
@@ -55,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartButton = document.getElementById('process_order');
     if (cartButton) {
         cartButton.addEventListener('click', () => {
-            sendCartToServer();
+            sendCartToServer(cartButton);
         });
     }
 });

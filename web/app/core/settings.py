@@ -28,9 +28,9 @@ SECURE_SSL_REDIRECT = False
 SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
 
-ALLOWED_HOSTS = ["3eac-95-26-124-223.ngrok-free.app", "127.0.0.1"]
+ALLOWED_HOSTS = ["7861-95-26-134-10.ngrok-free.app", "127.0.0.1"]
 CSRF_TRUSTED_ORIGINS = [
-    'https://3eac-95-26-124-223.ngrok-free.app',
+    'https://7861-95-26-134-10.ngrok-free.app',
     'http://3eac-95-26-124-223.ngrok-free.app',
 ]
 
