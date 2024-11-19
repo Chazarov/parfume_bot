@@ -21,11 +21,11 @@ async def process_cart(request: Request):
     if not telegram_id:
         return {"error": "Telegram ID не предоставлен"}, 400
     
-    cart_items = "\n".join(
-        [f"{item['name']} x {item['price']} Р" for item in cart]
+    cart_items = "\n\n".join(
+        [f"№{item['product_id']} {item['name']}: \n {item['price']} X volume: {item['volume']}ml Р" for item in cart]
     )
     
-    user_message = f"Ваши товары:\n{cart_items}"
+    user_message = f"Ваши товары:\n{cart_items}. Благодарим за заказ! В ближайшее время с вами свяжется наш оператор, для дальнейшего согласования"
     admin_message = f"id:{telegram_id} @{username}:\n{cart_items}"
     
     await bot.send_message(telegram_id, user_message) 
@@ -43,10 +43,8 @@ async def start_uvicorn():
     await server.serve()
 
 async def main():
-    # Запускаем сервер FastAPI в отдельной задаче
     asyncio.create_task(start_uvicorn())
     
-    # Запуск бота
     await dp.start_polling(bot)
     print("start")
 
