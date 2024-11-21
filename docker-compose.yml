@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  # База данных
+  db:
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: qwerty
+    networks:
+      - app-network
+
+  # Django-приложение
+  web:
+    build: 
+      context: .
+      dockerfile: ./web/Dockerfile
+    command: sh -c "cd web && gunicorn myproject.wsgi:application --bind 0.0.0.0:8000"
+    volumes:
+      - ./web:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - bot
+    environment:
+      - MAIN_HOST=127.0.0.1
+      - MAIN_URL=https://localhost:8000/
+      - USE_SSL=false
+      - USE_DEBUG_MODE=false
+      - DB_USER=postgres
+      - DB_PASSWORD=qwerty
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=postgres
+      - DJANGO_SECRET_KEY=aDSFHGOIHihiouPIUiuedf23787823__!!!
+      - BOT_API_URL=http://bot:8080
+    networks:
+      - app-network
+
+  bot:
+    build:
+      context: .
+      dockerfile: ./bot/Dockerfile
+    command: python bot.py
+    volumes:
+      - ./bot:/app
+    depends_on:
+      - web
+    environment:
+      - BOT_TOKEN=6863786681:AAFKGag6Uv_l_JVGbgWZQ2pFyrTdiEPoZIM
+      - ADMIN_ID=435037519
+      - WEB_APP_URL=https://t.me/C000lBot/larian
+      - MAIN_HOST=localhost
+      - MAIN_PORT=8080
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
+    driver: bridge
