@@ -38,7 +38,7 @@ async def start_command(message: types.Message):
     await message.answer("Привет!")
 
 async def start_uvicorn():
-    config = uvicorn.Config(app, host="0.0.0.0", port=8080)
+    config = uvicorn.Config(app, host=configs.MAIN_HOST, port=configs.MAIN_PORT)
     server = uvicorn.Server(config)
     await server.serve()
 

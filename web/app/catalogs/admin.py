@@ -1,5 +1,5 @@
 from django.contrib import admin
-from catalogs.models import ProductType ,Category, Brand, Product, SliderImges, Cart, CartItem, ProductImage, PriceVolumeItem
+from catalogs.models import ProductType ,Category, Brand, Product, SliderImges, Cart, CartItem, ProductImage, PriceVolumeItem, RunningLine
 
 
 
@@ -74,6 +74,18 @@ class CartAdmin(admin.ModelAdmin):
     list_display = ('user',)
     search_fields = ('user',)
     list_filter = ('user',)
+
+
+@admin.register(RunningLine)
+class MyModelAdmin(admin.ModelAdmin):
+    def has_add_permission(self, request, obj=None):
+        return False 
+
+    def has_delete_permission(self, request, obj=None):
+        return False 
+    
+    def has_change_permission(self, request, obj=None):
+        return True
 
 
 

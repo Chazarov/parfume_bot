@@ -1,10 +1,11 @@
 import requests
 from typing import List
 import json
+from core.config import configs
 
 from django.shortcuts import render
 from django.core.handlers.wsgi import WSGIRequest
-from catalogs.models import Category, Brand, Product, SliderImges, ProductImage, Cart, CartItem, PriceVolumeItem
+from catalogs.models import Category, Brand, Product, SliderImges, ProductImage, Cart, CartItem, PriceVolumeItem, RunningLine
 from django.http import HttpResponseBadRequest, HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404
 
@@ -14,6 +15,9 @@ def start_page(request):
     slides = SliderImges.objects.all()
     slides_count = len(slides)
     range_slides = range(slides_count)
+    running_line = RunningLine.objects.all().first()
+    running_line_text = running_line.text
+
     
 
 
@@ -22,7 +26,8 @@ def start_page(request):
         'categories':categories,
         'slides':slides,
         'range_slides':range_slides,
-        'slides_count':slides_count
+        'slides_count':slides_count,
+        "running_line_text":running_line_text,
     })
 
 
@@ -247,7 +252,7 @@ def to_bot(request):
 
 def process_order(request: WSGIRequest):
 
-    bot_api = 'http://localhost:8080/cart' #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    bot_api = configs.BOT_API_URL
     
     cart: Cart = request.cart
     telegram_id = request.GET.get('tgUserId')  

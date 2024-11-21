@@ -121,3 +121,14 @@ class CartItem(models.Model):
         verbose_name_plural = "Позиции корзины"
         unique_together = ('cart', 'product', 'price_item')  # Уникальность
 
+
+
+class RunningLine(models.Model):
+    text = models.TextField("Текст бегущей строки", default=" - ")
+
+    class Meta:
+        verbose_name_plural = "Бегущая строка"
+
+    def __str__(self):
+        return self.text.__str__()
+

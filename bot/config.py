@@ -13,9 +13,12 @@ def bo(s:str, default = False):
 
 class Configs:
 
-    WEB_APP_URL:str = "https://3eac-95-26-124-223.ngrok-free.app/"
+    MAIN_HOST: str = os.getenv("MAIN_HOST")
+    MAIN_PORT: str = os.getenv("MAIN_PORT")
+
+    WEB_APP_URL:str = os.getenv("WEB_APP_URL") #"https://t.me/C000lBot/larian"
     BOT_TOKEN: str = os.getenv("BOT_TOKEN")
-    ADMIN_ID: int = 6768853571
+    ADMIN_ID: int = os.getenv("ADMIN_ID") #435037519
 
 
 

@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+
+from core.config import configs
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,18 +23,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-y1kh8@qe3abgxjrijz%4#pw(sl#y@!8@&03%8)c&vav$bsvm8^'
+SECRET_KEY = configs.DJANGO_SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-SECURE_SSL_REDIRECT = False
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
+DEBUG = configs.DEBUG_MODE
+SECURE_SSL_REDIRECT = configs.USE_SSL
+SESSION_COOKIE_SECURE = configs.USE_SSL
+CSRF_COOKIE_SECURE = configs.USE_SSL
 
-ALLOWED_HOSTS = ["7861-95-26-134-10.ngrok-free.app", "127.0.0.1"]
+ALLOWED_HOSTS = [configs.MAIN_HOST, "127.0.0.1"]
 CSRF_TRUSTED_ORIGINS = [
-    'https://7861-95-26-134-10.ngrok-free.app',
-    'http://3eac-95-26-124-223.ngrok-free.app',
+    configs.MAIN_URL,
 ]
 
 
@@ -84,8 +86,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': configs.DB.NAME,
+        'USER': configs.DB.USER,
+        'PASSWORD': configs.DB.PASSWORD,
+        'HOST': configs.DB.HOST,  # имя сервиса, который будет доступен внутри Docker-сети
+        'PORT': configs.DB.PORT,
     }
 }
 
@@ -126,6 +132,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"] 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'

@@ -6,7 +6,7 @@ class CatalogsConfig(AppConfig):
     name = 'catalogs'
 
     def ready(self) -> None:
-        from catalogs.signals import session_ended
+        from catalogs.signals import session_ended, post_migrate_handler
 
         call_command('migrate')
         
