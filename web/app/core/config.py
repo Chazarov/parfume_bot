@@ -22,7 +22,7 @@ class Configs:
     USE_SSL = b(os.getenv("USE_SSL"))
 
     MAIN_HOST = os.getenv("MAIN_HOST")
-    MAIN_URL = os.getenv("MAIN_HURL")
+    MAIN_URL = os.getenv("MAIN_URL")
 
     BACKEND_CORS_ORIGINS: List[str] = ["*"]
 
