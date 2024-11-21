@@ -47,8 +47,6 @@ services:
     command: python bot.py
     volumes:
       - ./bot:/app
-    depends_on:
-      - web
     environment:
       - BOT_TOKEN=6863786681:AAFKGag6Uv_l_JVGbgWZQ2pFyrTdiEPoZIM
       - ADMIN_ID=435037519
