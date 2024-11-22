@@ -26,8 +26,8 @@ services:
       - db
       - bot
     environment:
-      - MAIN_HOST=90.156.171.106
-      - MAIN_URL=https://90.156.171.106/
+      - MAIN_HOST=83.222.24.44
+      - MAIN_URL=http://83.222.24.44
       - USE_SSL=false
       - USE_DEBUG_MODE=True
       - DB_USER=postgres
@@ -53,6 +53,18 @@ services:
       - WEB_APP_URL=https://t.me/C000lBot/larian
       - MAIN_HOST=localhost
       - MAIN_PORT=8080
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - static_volume:/static
+    depends_on:
+      - web
     networks:
       - app-network
 
