@@ -26,8 +26,8 @@ services:
       - db
       - bot
     environment:
-      - MAIN_HOST=127.0.0.1
-      - MAIN_URL=https://localhost:8000/
+      - MAIN_HOST=90.156.171.106
+      - MAIN_URL=https://90.156.171.106/
       - USE_SSL=false
       - USE_DEBUG_MODE=True
       - DB_USER=postgres
