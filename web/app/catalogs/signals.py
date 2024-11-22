@@ -2,7 +2,8 @@ from django.db.models.signals import post_delete
 from django.db.models.signals import post_migrate
 
 from django.dispatch import receiver
-from django.contrib.sessions.models import Session, get_user_model
+from django.contrib.sessions.models import Session
+from django.contrib.auth import get_user_model
 
 from catalogs.models import Cart
 from catalogs.models import RunningLine
