@@ -5,7 +5,7 @@ WORKDIR /app
 COPY web/requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
-RUN python manage.py collectstatic --noinput
+RUN python app/manage.py collectstatic --noinput
 
 COPY . .
 
