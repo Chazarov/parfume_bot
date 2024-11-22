@@ -18,8 +18,13 @@ class Configs:
 
     PROJECT_ROOT: str = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+    DJANGO_SECRET_KEY: str = os.getenv("DJANGO_SECRET_KEY")
     DEBUG_MODE = b(os.getenv("USE_DEBUG_MODE"))
     USE_SSL = b(os.getenv("USE_SSL"))
+
+    SUPERUSER_PASS = os.getenv("SUPERUSER_PASS")
+    SUPERUSER_NAME = os.getenv("SUPERUSER_NAME")
+    SUPERUSER_EMAIL = os.getenv("SUPERUSER_EMAIL")
 
     MAIN_HOST = os.getenv("MAIN_HOST")
     MAIN_URL = os.getenv("MAIN_URL")
@@ -56,7 +61,7 @@ class Configs:
         )
 
 
-    DJANGO_SECRET_KEY: str = os.getenv("DJANGO_SECRET_KEY")
+    
 
 
     BOT_API_URL: str = os.getenv("BOT_API_URL")

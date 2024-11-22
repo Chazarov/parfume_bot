@@ -29,6 +29,9 @@ services:
     environment:
       - MAIN_HOST=83.222.24.44
       - MAIN_URL=https://83.222.24.44/
+      - SUPERUSER_PASS=1124816
+      - SUPERUSER_NAME=admin
+      - SUPERUSER_EMAIL=zaharowanrew@gmail.com 
       - USE_SSL=false
       - USE_DEBUG_MODE=True
       - DB_USER=postgres
