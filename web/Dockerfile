@@ -5,9 +5,10 @@ WORKDIR /app
 COPY web/requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
-RUN python web/app/manage.py collectstatic --noinput
 
 COPY . .
+
+
 
 ENV PYTHONUNBUFFERED 1
 
