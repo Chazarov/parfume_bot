@@ -5,8 +5,7 @@ from django.dispatch import receiver
 from django.contrib.sessions.models import Session
 from django.contrib.auth import get_user_model
 
-from catalogs.models import Cart
-from catalogs.models import RunningLine
+from catalogs.models import Cart, RunningLine, Settings
 
 from core.config import configs
 
@@ -17,14 +16,24 @@ from core.config import configs
 
 @receiver(post_migrate)
 def post_migrate_handler(sender, **kwargs):
+
+
     o = RunningLine.objects.all()
     if(not o.exists()):
         RunningLine.objects.create()
+
+    o = Settings.objects.all()
+    if(not o.exists()):
+        Settings.objects.create()
 
     if(configs.SUPERUSER_NAME and configs.SUPERUSER_PASS and configs.SUPERUSER_EMAIL):
         User = get_user_model()  
         User.objects.filter(username='admin').exists() or \
         User.objects.create_superuser(configs.SUPERUSER_NAME, configs.SUPERUSER_EMAIL, configs.SUPERUSER_PASS)
+
+
+    
+    
     
 
 

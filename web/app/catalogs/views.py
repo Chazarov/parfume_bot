@@ -5,7 +5,8 @@ from core.config import configs
 
 from django.shortcuts import render
 from django.core.handlers.wsgi import WSGIRequest
-from catalogs.models import Category, Brand, Product, SliderImges, ProductImage, Cart, CartItem, PriceVolumeItem, RunningLine
+from catalogs.models import (Category, Brand, Product, SliderImges, ProductImage, 
+                             Cart, CartItem, PriceVolumeItem, RunningLine, Settings)
 from django.http import HttpResponseBadRequest, HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404
 
@@ -238,21 +239,33 @@ def get_price(request):
 
 
 
-def get_help(request):
-    help_url = 'https://t.me/ZAM_Andrew'
+def to_help(request):
+    settings = Settings.objects.all().first()
+    url = settings.help_url
     
-    return HttpResponseRedirect(help_url)
+    return HttpResponseRedirect(url)
 
 def to_bot(request):
-    bot_url = "https://t.me/C000lBot"
+    settings = Settings.objects.all().first()
+    url = settings.bot_url
     
-    return HttpResponseRedirect(bot_url)
+    return HttpResponseRedirect(url)
+
+def to_channel(request):
+    settings = Settings.objects.all().first()
+    url = settings.main_channel_url
+    
+    return HttpResponseRedirect(url)
+
 
 
 
 def process_order(request: WSGIRequest):
 
     bot_api = configs.BOT_API_URL
+
+    settings = Settings.objects.all().first()
+    admin_id = settings.admin_id
     
     cart: Cart = request.cart
     telegram_id = request.GET.get('tgUserId')  
@@ -273,6 +286,7 @@ def process_order(request: WSGIRequest):
         return JsonResponse({'error': 'Telegram ID not provided'}, status=400)
 
     response = requests.post(bot_api, json={
+        'admin_id':admin_id,
         'telegram_id': telegram_id,
         'username': username,
         'cart': cart_items

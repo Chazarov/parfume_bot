@@ -131,4 +131,21 @@ class RunningLine(models.Model):
 
     def __str__(self):
         return self.text.__str__()
+    
+
+class Settings(models.Model):
+    name = models.CharField(" - ", max_length=50, default="Настройки", null=True)
+
+
+    admin_id = models.CharField("Telegram Id (менеджер)", max_length=255, null=True)
+    main_channel_url = models.CharField("ссылка основного телеграм канала", max_length=255, null=True)
+    help_url = models.CharField("ссылка поддержки", max_length=255, null=True)
+    bot_url = models.CharField("ссылка бота")
+
+
+    class Meta:
+        verbose_name_plural = "Настройки"
+
+    def __str__(self):
+        return self.name.__str__()
 

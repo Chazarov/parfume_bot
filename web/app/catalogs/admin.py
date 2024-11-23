@@ -1,5 +1,8 @@
 from django.contrib import admin
-from catalogs.models import ProductType ,Category, Brand, Product, SliderImges, Cart, CartItem, ProductImage, PriceVolumeItem, RunningLine
+from catalogs.models import (ProductType ,Category, 
+                             Brand, Product, SliderImges, 
+                             Cart, CartItem, ProductImage, 
+                             PriceVolumeItem, RunningLine, Settings)
 
 
 
@@ -77,7 +80,7 @@ class CartAdmin(admin.ModelAdmin):
 
 
 @admin.register(RunningLine)
-class MyModelAdmin(admin.ModelAdmin):
+class RunningLineAdmin(admin.ModelAdmin):
     def has_add_permission(self, request, obj=None):
         return False 
 
@@ -86,6 +89,22 @@ class MyModelAdmin(admin.ModelAdmin):
     
     def has_change_permission(self, request, obj=None):
         return True
+
+
+@admin.register(Settings)
+class SettingsAdmin(admin.ModelAdmin):
+    readonly_fields = ('name',)
+
+    
+    def has_add_permission(self, request, obj=None):
+        return False 
+
+    def has_delete_permission(self, request, obj=None):
+        return False 
+    
+    def has_change_permission(self, request, obj=None):
+        return True
+
 
 
 
