@@ -11,7 +11,6 @@ services:
     networks:
       - app-network
 
-  # Django-приложение
   web:
     build: 
       context: .
@@ -44,7 +43,6 @@ services:
     networks:
       - app-network
 
-  # Nginx
   nginx:
     image: nginx:latest
     volumes:
@@ -57,7 +55,6 @@ services:
     networks:
       - app-network
 
-  # Telegram-бот
   bot:
     build:
       context: .
@@ -66,9 +63,7 @@ services:
     volumes:
       - ./bot:/app
     environment:
-      - BOT_TOKEN=6863786681:AAFKGag6Uv_l_JVGbgWZQ2pFyrTdiEPoZIM
-      - ADMIN_ID=435037519
-      - WEB_APP_URL=https://t.me/C000lBot/larian
+      - BOT_TOKEN=7570491150:AAEmBEoVdq4I8laut3im76RP95xPHoulEQ8
       - MAIN_HOST=localhost
       - MAIN_PORT=8080
     networks:
