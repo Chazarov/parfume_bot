@@ -35,8 +35,7 @@ def start_page(request):
 
 def category_catalogs(request, category_id):
     category = Category.objects.get(id = category_id)
-    if(category.prime_category):
-        return product_by_category(request, None, category_id, prime_category=True)
+    return product_by_category(request, category_id)
 
     
 
