@@ -7,7 +7,6 @@ class Category(models.Model):
     name = models.CharField("Название", max_length=55)
     description = models.TextField("Описание")
     image = models.ImageField(upload_to='category_images/', null=True, blank=True)
-    prime_category = models.BooleanField("Локальная категория", default=False)
 
     class Meta:
         verbose_name_plural = "Категории"
