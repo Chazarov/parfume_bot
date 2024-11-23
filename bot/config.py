@@ -16,9 +16,8 @@ class Configs:
     MAIN_HOST: str = os.getenv("MAIN_HOST")
     MAIN_PORT: str = os.getenv("MAIN_PORT")
 
-    WEB_APP_URL:str = os.getenv("WEB_APP_URL") #"https://t.me/C000lBot/larian"
+    WEB_APP_URL:str = os.getenv("WEB_APP_URL")
     BOT_TOKEN: str = os.getenv("BOT_TOKEN")
-    ADMIN_ID: int = os.getenv("ADMIN_ID") #435037519
 
 
 

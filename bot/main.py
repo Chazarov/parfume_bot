@@ -17,6 +17,7 @@ async def process_cart(request: Request):
     telegram_id = data.get('telegram_id')
     cart = data.get('cart')
     username = data.get('username')
+    admin_id = data.get('admin_id')
     
     if not telegram_id:
         return {"error": "Telegram ID не предоставлен"}, 400
@@ -25,11 +26,11 @@ async def process_cart(request: Request):
         [f"№{item['product_id']} {item['name']}: \n {item['price']} X volume: {item['volume']}ml Р" for item in cart]
     )
     
-    user_message = f"Ваши товары:\n{cart_items}. Благодарим за заказ! В ближайшее время с вами свяжется наш оператор, для дальнейшего согласования"
-    admin_message = f"id:{telegram_id} @{username}:\n{cart_items}"
+    user_message = f"Ваши товары:\n{cart_items}.\n\n Благодарим за заказ! В ближайшее время с вами свяжется наш оператор, для дальнейшего согласования"
+    admin_message = f"id:{telegram_id} @{username}:\n\n\n{cart_items}"
     
     await bot.send_message(telegram_id, user_message) 
-    await bot.send_message(configs.ADMIN_ID, admin_message)
+    await bot.send_message(admin_id, admin_message)
 
     return {"status": "Сообщение отправлено в Telegram"}
 
