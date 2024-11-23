@@ -4,7 +4,6 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.filters.command import Command
 import uvicorn
 from config import configs
-from kbds import main_menu_buttons
 
 app = FastAPI()
 bot = Bot(token=configs.BOT_TOKEN)
@@ -18,6 +17,9 @@ async def process_cart(request: Request):
     cart = data.get('cart')
     username = data.get('username')
     admin_id = data.get('admin_id')
+
+    if not admin_id:
+        return {"error": "Admin ID не предоставлен"}, 400
     
     if not telegram_id:
         return {"error": "Telegram ID не предоставлен"}, 400
