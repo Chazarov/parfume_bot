@@ -12,11 +12,8 @@ def bo(s:str, default = False):
     else: return default
 
 class Configs:
-
     MAIN_HOST: str = os.getenv("MAIN_HOST")
     MAIN_PORT: str = os.getenv("MAIN_PORT")
-
-    WEB_APP_URL:str = os.getenv("WEB_APP_URL")
     BOT_TOKEN: str = os.getenv("BOT_TOKEN")
 
 
