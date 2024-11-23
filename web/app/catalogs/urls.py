@@ -8,8 +8,9 @@ urlpatterns = [
     path('cart', views.cart_page, name='cart'),
     path('<int:product_id>/', views.product_page, name = "product"),
     path('brand/<int:brand_id>/', views.products_by_brend, name = "brand_products"),
-    path('help', views.get_help, name='get_help'),
-    path('tgbot', views.to_bot, name = "bot")
+    path('help', views.to_help, name="help"),
+    path('tgbot', views.to_bot, name = "bot"),
+    path('channel', views.to_channel, name = "channel"),
 ]
 
 
