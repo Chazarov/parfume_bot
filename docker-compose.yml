@@ -15,8 +15,8 @@ services:
     build: 
       context: .
       dockerfile: ./web/Dockerfile
-    # command: sh -c "cd app && python manage.py collectstatic --noinput && gunicorn core.wsgi:application --bind 0.0.0.0:8000"
-    command: sh -c "cd app && python manage.py runserver 0.0.0.0:8000"
+    # command: sh -c "cd app && python manage.py collectstatic --noinput && gunicorn core.wsgi:application --bind 0.0.0.0"
+    command: sh -c "cd app && python manage.py runserver 0.0.0.0"
     volumes:
       - ./web:/app
       - static_volume:/app/static
@@ -26,13 +26,13 @@ services:
       - db
       - bot
     environment:
-      - MAIN_HOST=83.222.24.44
-      - MAIN_URL=https://83.222.24.44/
+      - MAIN_HOST=laianbotrus.ru
+      - MAIN_URL=http://laianbotrus.ru
       - SUPERUSER_PASS=1124816
       - SUPERUSER_NAME=admin
       - SUPERUSER_EMAIL=zaharowanrew@gmail.com 
       - USE_SSL=false
-      - USE_DEBUG_MODE=True
+      - USE_DEBUG_MODE=false
       - DB_USER=postgres
       - DB_PASSWORD=qwerty
       - DB_HOST=db
