@@ -15,8 +15,8 @@ services:
     build: 
       context: .
       dockerfile: ./web/Dockerfile
-    # command: sh -c "cd app && python manage.py collectstatic --noinput && gunicorn core.wsgi:application --bind 0.0.0.0:"
-    command: sh -c "cd app && python manage.py runserver 0.0.0.0:"
+    # command: sh -c "cd app && python manage.py collectstatic --noinput && gunicorn core.wsgi:application --bind 0.0.0.0:80"
+    command: sh -c "cd app && python manage.py runserver 0.0.0.0:80"
     volumes:
       - ./web:/app
       - static_volume:/app/static
