@@ -1,23 +1,22 @@
-#slider { /*положение слайдера*/
+#slider {
     position: relative;
 	text-align: center;
 }
 
-#slider{ /*центровка слайдера*/
+#slider{
 	margin: 0 auto;
 	margin-bottom: 20px;
 }
 
-#slides article{ /*все изображения справа друг от доруга*/
+#slides article{
 	width: 100%;
 	float: left;
 }
 
 
-/*устанавливает общий размер блока с изображениями*/
 #slides .image{ 
 	margin-top: -10%;
-	display: flex;  /* Используем flexbox */
+	display: flex; 
     flex-wrap: nowrap;
 }
 
@@ -61,7 +60,7 @@
 	color: var(--primary_color)
 }
 
-#overflow{ /*сркывает все, что находится за пределами этого блока*/
+#overflow{ 
 	width: 100%;
 	position: relative;
 	border-top-left-radius: 10px;
@@ -76,9 +75,9 @@ article img{
     object-position: center; 
 }
 
-#desktop:checked ~ #slider{ /*размер всего слайдера*/
+#desktop:checked ~ #slider{ 
 	
-	max-width: 500px; /*максимальнная длинна*/
+	max-width: 500px;
 }
 
 .center-buttons {
@@ -91,7 +90,7 @@ article img{
     transform: translateY(-50%);
 }
 
-/*настройка переключения и положения для левой стрелки*/
+
 .arrow{
 	margin: 10px;
 	display: flex;
@@ -125,58 +124,58 @@ article img{
 	float: right;
 } 
 
-label, a{ /*при наведении на стрелки или переключатели - курсор изменится*/
+label, a{
 	cursor: pointer;
 }
 
-.all input{ /*скрывает стандартные инпуты (чекбоксы) на странице*/
+.all input{
 	display: none;
 }
 
-/*позиция изображения при активации переключателя*/
+
 #switch1:checked ~ #slides .image{
 	margin-left: 0;
 }
 
-#controls{ /*положение блока всех управляющих элементов*/
+#controls{ 
 	margin: 0% 0 0 0;
 	width: 100%;
 	height: 50px;
 }
 
-#active label{ /*стиль отдельного переключателя*/
-	border-radius: 10px; /*скругление углов*/
-	display: inline-block; /*расположение в строку*/
+#active label{
+	border-radius: 10px; 
+	display: inline-block; 
 	width: 7px;
 	height: 7px;
 	background: var(--primary_color);
 	opacity: 0.5;
 }
 
-#active{ /*расположение блока с переключателями*/
+#active{ 
 	margin: -50px 0 0;
 	text-align: center;
 }
 
-#active label:hover{ /*поведение чекбокса при наведении*/
+#active label:hover{ 
 	background: var(--choise_color);
-	border-color: var(--middle_color) !important; /*выполнение в любом случае*/
+	border-color: var(--middle_color) !important; 
 }
 
-/*цвет активного лейбла при активации чекбокса*/
+
 #switch1:checked ~ #active label:nth-child(1){
 	background: var(--color_3);
 	border-color: var(--color_3) !important;
 }
 
-#slides .image{ /*анимация пролистывания изображений*/
+#slides .image{ 
 	transition: all 800ms cubic-bezier(0.770, 0.000, 0.175, 1.000);
 }
 
-#controls label:hover{ /*прозрачность стрелок при наведении*/
+#controls label:hover{ 
 	opacity: 0.6;
 }
 
-#controls label{ /*прозрачность стрелок при отводе курсора*/
+#controls label{ 
 	transition: opacity 0.2s ease-out;
 }
