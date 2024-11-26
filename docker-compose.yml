@@ -54,7 +54,7 @@ services:
       - ./nginx/vhost:/etc/nginx/vhost.d
       - ./nginx/html:/usr/share/nginx/html
     environment:
-      - DEFAULT_HOST=ваш-домен
+      - DEFAULT_HOST=laianbotrus.ru
     networks:
       - app-network
 
