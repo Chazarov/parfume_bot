@@ -47,6 +47,9 @@ services:
         context: .
         dockerfile: ./nginx/Dockerfile
     container_name: nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro  # Копируем конфиг Nginx
+      - ./web/app/static:/usr/share/nginx/html/static
     ports:
       - "80:80"
     depends_on:
