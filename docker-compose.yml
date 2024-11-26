@@ -42,34 +42,13 @@ services:
     networks:
       - app-network
       
-  nginx-proxy:
-    image: jwilder/nginx-proxy:alpine
-    container_name: nginx-proxy
-    ports:
-      - "80:80"
-      - "443:443"
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
     volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ./nginx/certs:/etc/nginx/certs:ro
-      - ./nginx/vhost:/etc/nginx/vhost.d
-      - ./nginx/html:/usr/share/nginx/html
-    environment:
-      - DEFAULT_HOST=laianbotrus.ru
-    networks:
-      - app-network
-
-  letsencrypt:
-    image: jrcs/letsencrypt-nginx-proxy-companion
-    container_name: letsencrypt
-    depends_on:
-      - nginx-proxy
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./nginx/certs:/etc/nginx/certs
-      - ./nginx/vhost:/etc/nginx/vhost.d
-      - ./nginx/html:/usr/share/nginx/html
-    networks:
-      - app-network
+      - ./nginx/certs:/etc/letsencrypt
+      - ./nginx/html:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do sleep 1; done'"
 
   nginx:
     build: 
