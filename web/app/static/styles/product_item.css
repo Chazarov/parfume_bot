@@ -65,8 +65,8 @@
 
     div.value{
         display: flex;
-        justify-content: center; /* Горизонтальное центрирование */
-        align-items:end; /* Вертикальное центрирование */
+        justify-content: center;
+        align-items:end;
         font-weight: 100;
         font-size: 13px;
         font-family: "Gotham"

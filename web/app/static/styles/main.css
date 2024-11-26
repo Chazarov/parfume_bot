@@ -124,10 +124,10 @@ hr {
     width: 100%;
     background-color: transparent;
     border: none;
-    cursor: pointer; /* Указатель при наведении */
-    display: flex; /* Включаем Flexbox для центрирования иконки */
-    justify-content: center; /* Центрируем по горизонтали */
-    align-items: center; /* Центрируем по вертикали */
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -218,10 +218,10 @@ hr {
     height: 50px;
     background-color: transparent;
     border: none;
-    cursor: pointer; /* Указатель при наведении */
-    display: flex; /* Включаем Flexbox для центрирования иконки */
-    justify-content: center; /* Центрируем по горизонтали */
-    align-items: center; /* Центрируем по вертикали */
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .icon-btn :hover{
     background-color: var(--items_color);

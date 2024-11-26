@@ -24,9 +24,9 @@
 
 
 .image_container{
-    width: 100px; /* Ширина изображения */
+    width: 100px;
     height: 100%;
-    border-radius: 3px 0 0 3px; /* Закругление углов слева */
+    border-radius: 3px 0 0 3px;
     overflow: hidden;
 }
 
@@ -36,16 +36,15 @@
 
 
 .product-image {
-    height: 100%; /* Ширина изображения */
+    height: 100%;
     object-fit: contain;
-    border-radius: 3px 0 0 3px; /* Закругление углов слева */
+    border-radius: 3px 0 0 3px;
 
 }
 
 .product-details {
-    flex-grow: 1; /* Занимает доступное пространство */
-    padding: 0 5px; /* Отступы справа и слева */
-
+    flex-grow: 1;
+    padding: 0 5px;
     .top_part{
         position: absolute;
         top: 0;
@@ -68,18 +67,18 @@
     padding-right: 30px;
     font-family: 'Gotham';
     font-size: 0.8em;
-    color: #666; /* Цвет описания */
+    color: #666; 
 }
 
 .product-price {
     font-family: 'Futura';
     font-weight: 100;
     position: absolute;
-    font-size: 1em; /* Размер шрифта цены */
-    color: #333; /* Цвет цены */
+    font-size: 1em; 
+    color: #333; 
 
 
-    text-align: right; /* Выравнивание по правому краю */
+    text-align: right;
     right: 0;
     bottom: 0;
     padding-right: 0.8em;
@@ -111,15 +110,15 @@
     z-index: 100;
     cursor: pointer;
     display: flex;
-    justify-content: center; /* Центрирование по горизонтали */
-    align-items: center;     /* Центрирование по вертикали */
+    justify-content: center;
+    align-items: center;    
 
     .icon-btn{
         margin-left: 10px;
         display: flex;
         border-radius: 50%;
-        justify-content: center; /* Центрирование по горизонтали */
-        align-items: center;     /* Центрирование по вертикали */
+        justify-content: center; 
+        align-items: center;    
         background-color: var(--buttons_color);
         width: 40px;
         height: 40px;
@@ -134,8 +133,8 @@
     .text-btn{
         padding: 15px;
         display: flex;
-        justify-content: center; /* Центрирование по горизонтали */
-        align-items: center;     /* Центрирование по вертикали */
+        justify-content: center; 
+        align-items: center;     
         height: 20px;
         width: 80px;
 
