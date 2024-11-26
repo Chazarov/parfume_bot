@@ -58,7 +58,7 @@
                                 <article>
                                     <div class="slide">
                                         <p><div class = "title">{{slide.title}}</div></p>
-                                        <p><button onclick="window.location.href='{% url 'brand_products' brand_id=slide.brand.id %}'" class="inner_button">перейти →</button><img src="{{ slide.image.url }}"></p>
+                                        <p><button onclick="window.location.href='{% url 'brand_products' brand_id=slide.brand.id %}'" class="inner_button">перейти</button><img src="{{ slide.image.url }}"></p>
                                     </div>
                                 </article>
                             {% endfor %}
