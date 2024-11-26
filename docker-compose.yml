@@ -48,7 +48,7 @@ services:
         dockerfile: ./nginx/Dockerfile
     container_name: nginx
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro  # Копируем конфиг Nginx
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./web/app/static:/usr/share/nginx/html/static
     ports:
       - "80:80"
