@@ -34,6 +34,10 @@ CSRF_COOKIE_SECURE = configs.USE_SSL
 ALLOWED_HOSTS = configs.ALLOWED_HOSTS
 CSRF_TRUSTED_ORIGINS = configs.URLS
 
+print(f"\n\nALLOWED HOSTS: {ALLOWED_HOSTS}")
+print(f"CSRF_TRUSTED_ORIGINS: {CSRF_TRUSTED_ORIGINS}")
+print(f"Debug mode: {DEBUG}")
+print(f"SSL use: {configs.USE_SSL}")
 
 # Application definition
 

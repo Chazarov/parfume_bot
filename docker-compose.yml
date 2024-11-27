@@ -26,12 +26,12 @@ services:
       - bot
     environment:
       - ALLOWED_HOSTS=127.0.0.1,83.222.24.44,laianbotrus.ru
-      - URLS=http://localhost:8000,http://83.222.24.44:8000,http://83.222.24.44,http://laianbotrus.ru,https://laianbotrus.ru
+      - URLS=http://83.222.24.44:8000,http://83.222.24.44,http://laianbotrus.ru,https://laianbotrus.ru
       - SUPERUSER_PASS=1124816
       - SUPERUSER_NAME=admin
       - SUPERUSER_EMAIL=zaharowanrew@gmail.com 
-      - USE_SSL=false
-      - USE_DEBUG_MODE=true
+      - USE_SSL=True
+      - USE_DEBUG_MODE=false
       - DB_USER=postgres
       - DB_PASSWORD=qwerty
       - DB_HOST=db
