@@ -28,8 +28,8 @@ class Configs:
     SUPERUSER_NAME = os.getenv("SUPERUSER_NAME")
     SUPERUSER_EMAIL = os.getenv("SUPERUSER_EMAIL")
 
-    ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
-    URLS = os.getenv("URLS", "").split(",")
+    ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(",")
+    URLS = os.getenv("URLS").split(",")
 
     BACKEND_CORS_ORIGINS: List[str] = ["*"]
 
