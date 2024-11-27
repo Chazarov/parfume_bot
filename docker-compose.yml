@@ -1,5 +1,4 @@
 services:
-  # База данных
   db:
     image: postgres:13
     volumes:
