@@ -11,6 +11,8 @@ def b(s:str, default = False):
         else: return False
     else: return default
 
+
+
 class Configs:
     PROJECT_NAME: str = "mailing_core"
 
@@ -26,8 +28,8 @@ class Configs:
     SUPERUSER_NAME = os.getenv("SUPERUSER_NAME")
     SUPERUSER_EMAIL = os.getenv("SUPERUSER_EMAIL")
 
-    MAIN_HOST = os.getenv("MAIN_HOST")
-    MAIN_URL = os.getenv("MAIN_URL")
+    ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
+    URLS = os.getenv("URLS", "").split(",")
 
     BACKEND_CORS_ORIGINS: List[str] = ["*"]
 
