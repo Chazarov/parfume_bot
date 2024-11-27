@@ -1,10 +1,8 @@
 FROM nginx:alpine
 
-# Копируем конфигурацию Nginx
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
-
-# Копируем статические файлы
 COPY ./web/app/static /usr/share/nginx/html/static
+COPY ./web/app/media /usr/share/nginx/html/media
 
 # Копируем сертификаты SSL (обновите путь в зависимости от вашей конфигурации)
 COPY ./ssl /etc/letsencrypt/live/laianbotrus.ru
