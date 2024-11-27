@@ -26,7 +26,7 @@ services:
       - bot
     environment:
       - ALLOWED_HOSTS=127.0.0.1,83.222.24.44,laianbotrus.ru
-      - URLS=http://localhost:8000,http://83.222.24.44:8000,http://83.222.24.44,http://laianbotrus.ru
+      - URLS=http://localhost:8000,http://83.222.24.44:8000,http://83.222.24.44,http://laianbotrus.ru,https://laianbotrus.ru
       - SUPERUSER_PASS=1124816
       - SUPERUSER_NAME=admin
       - SUPERUSER_EMAIL=zaharowanrew@gmail.com 
