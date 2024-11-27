@@ -27,7 +27,7 @@ SECRET_KEY = configs.DJANGO_SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = configs.DEBUG_MODE
-SECURE_SSL_REDIRECT = configs.USE_SSL
+SECURE_SSL_REDIRECT = False #configs.USE_SSL
 SESSION_COOKIE_SECURE = configs.USE_SSL
 CSRF_COOKIE_SECURE = configs.USE_SSL
 
