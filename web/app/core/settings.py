@@ -86,16 +86,16 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': configs.DB.NAME,
-#         'USER': configs.DB.USER,
-#         'PASSWORD': configs.DB.PASSWORD,
-#         'HOST': configs.DB.HOST,  # имя сервиса, который будет доступен внутри Docker-сети
-#         'PORT': configs.DB.PORT,
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': configs.DB.NAME,
+        'USER': configs.DB.USER,
+        'PASSWORD': configs.DB.PASSWORD,
+        'HOST': configs.DB.HOST,  # имя сервиса, который будет доступен внутри Docker-сети
+        'PORT': configs.DB.PORT,
+    }
+}
 
 
 # Password validation
