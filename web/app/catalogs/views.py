@@ -124,7 +124,6 @@ def product_page(request:WSGIRequest, product_id):
 
 def cart_page(request):
     cart_items = list(request.cart.cartitem_set.all())
-    print(cart_items)
     return render(request, 'catalogs/cart_list.html',
     {
         "cart_items":cart_items,
@@ -149,12 +148,10 @@ def add_to_cart_or_delete_in_cart(request: WSGIRequest):
             cart_items = CartItem.objects.filter(cart = cart, product=product)
             if(cart_items.exists()):
                 cart_items.delete()
-                print("product DELETE in cart without price_item!")
                 return JsonResponse({'in_cart': False}, status=200)
             else:
                 price_volume_item = PriceVolumeItem.objects.filter(product=product).first()
                 CartItem.objects.create(cart = cart, product = product, price_item = price_volume_item)
-                print("product ADD in cart without price_item!")
                 return JsonResponse({'in_cart': True}, status=200)
         else:
             price_volume_item = PriceVolumeItem.objects.get(id = volume_item_id)
@@ -162,11 +159,9 @@ def add_to_cart_or_delete_in_cart(request: WSGIRequest):
             try:
                 cart_item = CartItem.objects.get(cart = cart, product = product, price_item = price_volume_item)
                 cart_item.delete()
-                print("product with price_item was DELETE!!!")
                 return JsonResponse({'in_cart': False}, status=200)
             except CartItem.DoesNotExist:
                 CartItem.objects.create(cart = cart, product = product, price_item = price_volume_item)
-                print("product with price_item was CREATE!!!")
                 return JsonResponse({'in_cart': True}, status=200)
 
     else:
@@ -191,19 +186,15 @@ def product_is_in_cart(request):
         if(not volume_item_id):
             cart_items = CartItem.objects.filter(cart = cart, product=product)
             if(cart_items.exists()):
-                print(True)
                 return JsonResponse({'in_cart': True}, status=200)
             else:
-                print(False)
                 return JsonResponse({'in_cart': False}, status=200)
         else:
             price_volume_item = PriceVolumeItem.objects.get(id = volume_item_id)
             try:
-                print(True)
                 CartItem.objects.get(cart = cart, product = product, price_item = price_volume_item)
                 return JsonResponse({'in_cart': True}, status=200)
             except CartItem.DoesNotExist:
-                print(False)
                 return JsonResponse({'in_cart': False}, status=200)
 
     else:
