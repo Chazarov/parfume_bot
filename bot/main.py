@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request
 import asyncio
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters.command import Command
+from aiogram.exceptions import TelegramBadRequest
 import uvicorn
 from config import configs
 
@@ -31,8 +32,14 @@ async def process_cart(request: Request):
     user_message = f"Ваши товары:\n{cart_items}.\n\n Благодарим за заказ! В ближайшее время с вами свяжется наш оператор, для дальнейшего согласования"
     admin_message = f"id:{telegram_id} @{username}:\n\n\n{cart_items}"
     
-    await bot.send_message(telegram_id, user_message) 
-    await bot.send_message(admin_id, admin_message)
+    try:
+        await bot.send_message(telegram_id, user_message)
+        await bot.send_message(admin_id, admin_message)
+        
+    except TelegramBadRequest as e:
+        return {"error": f"Ошибка Telegram: {str(e)}"}, 400
+    except Exception as e:
+        return {"error": f"Произошла ошибка: {str(e)}"}, 500
 
     return {"status": "Сообщение отправлено в Telegram"}
 
