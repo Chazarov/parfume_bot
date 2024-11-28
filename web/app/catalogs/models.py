@@ -133,13 +133,13 @@ class RunningLine(models.Model):
     
 
 class Settings(models.Model):
-    name = models.CharField(" - ", max_length=50, default="Настройки", null=True)
+    name = models.CharField(" - ", max_length=50, default="Настройки", blank=True)
 
 
-    admin_id = models.CharField("Telegram Id (менеджер)", max_length=255, null=True)
-    main_channel_url = models.CharField("ссылка основного телеграм канала", max_length=255, null=True)
-    help_url = models.CharField("ссылка поддержки", max_length=255, null=True)
-    bot_url = models.CharField("ссылка бота")
+    admin_id = models.IntegerField("Telegram Id (менеджер)", null=True, blank=True, default=None)
+    main_channel_url = models.CharField("ссылка основного телеграм канала", default=" ", max_length=255, blank=True)
+    help_url = models.CharField("ссылка поддержки", default=" ", max_length=255, blank=True)
+    bot_url = models.CharField("ссылка бота", default=" ", max_length=255, blank=True)
 
 
     class Meta:

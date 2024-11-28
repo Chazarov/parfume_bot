@@ -8,5 +8,5 @@ class CatalogsConfig(AppConfig):
     def ready(self) -> None:
         from catalogs.signals import session_ended, post_migrate_handler
 
-        call_command('migrate')
+        # call_command('migrate')
         
