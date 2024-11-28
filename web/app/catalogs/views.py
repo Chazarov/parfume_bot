@@ -279,16 +279,15 @@ def process_order(request: WSGIRequest):
         'admin_id':admin_id,
         'telegram_id': telegram_id,
         'username': username,
-        'cart': cart_items
+        'cart': cart_items,
     })
 
-    error = response.json.get("error")
+    error = response.json().get("error")
     
 
     
     if response.status_code == 200:
         return JsonResponse({'status': 'success'})
     else:
-        print(f"❗❗❗  {response.text}  {error}   ❗❗❗")
         return JsonResponse({'status': 'failure', 'details': f"{response.text}  {error}"}, status=response.status_code)
     
