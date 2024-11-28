@@ -252,7 +252,7 @@ def to_channel(request):
 
 def process_order(request: WSGIRequest):
 
-    bot_api = configs.BOT_API_URL
+    bot_api = configs.BOT_API_URL + "/cart"
 
     settings = Settings.objects.all().first()
     admin_id = settings.admin_id
