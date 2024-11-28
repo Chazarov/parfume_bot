@@ -37,7 +37,7 @@ function sendCartToServer(buttonElement) {
             }
         })
         .catch(error => {
-            alert('Ошибка сети:' + actionUrl + " : " + error);
+            alert('Ошибка сети:' + error);
         });
 
     } catch (error) {
