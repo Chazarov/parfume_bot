@@ -43,7 +43,7 @@
                 </div>
                 
                 
-                <div class = "image_container">
+                <div class = "image_container big">
                     {% if item.product.images.all %}
                         <img src="{{ item.product.images.all.0.image.url }}" alt="Товар" class="product-image">
                     {% else %}
@@ -52,7 +52,7 @@
                 </div>
                     
                 <div class="product-details">
-                    <div class="top_part">
+                    <div class="top_part big">
                         <p class="product-title">{{item.product.name}}</p>
                         <p class="product-description">{{item.product.description}}</p>                    
                     </div>
