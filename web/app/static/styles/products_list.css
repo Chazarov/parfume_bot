@@ -30,7 +30,7 @@
     overflow: hidden;
 }
 
-.image_container .big{
+.image_container.big{
     width: 150px;
 }
 
@@ -52,7 +52,7 @@
         padding: 10px;
     }
 
-    .top_part .big{
+    .top_part.big{
         position: absolute;
         top: 0;
         left: 150px;
