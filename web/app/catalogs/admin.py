@@ -60,12 +60,6 @@ class SliderImagesAdmin(admin.ModelAdmin):
 
 
 
-@admin.register(CartItem)
-class CartItemAdmin(admin.ModelAdmin):
-    list_display = ('product',)
-    search_fields = ('product',)
-    list_filter = ('product',)
-
 class CartItemInline(admin.TabularInline):
     model = CartItem
     extra = 1
