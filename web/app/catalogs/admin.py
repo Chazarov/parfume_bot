@@ -72,10 +72,7 @@ class CartAdmin(admin.ModelAdmin):
     search_fields = ('user',)
     list_filter = ('user',)
 
-    def has_delete_permission(self, request, obj=None):
-        return False 
-    
-    def has_change_permission(self, request, obj=None):
+    def has_add_permission(self, request, obj=None):
         return False
 
 
