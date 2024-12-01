@@ -25,4 +25,4 @@ class CartMiddleware(MiddlewareMixin):
 
 
 def delete_unused_backets():
-    Cart.objects.filter(items__isnull=True).delete()
+    Cart.objects.filter(cartitem__isnull=True).delete()
