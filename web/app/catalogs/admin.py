@@ -60,17 +60,23 @@ class SliderImagesAdmin(admin.ModelAdmin):
 
 
 
-# class CartItemInline(admin.TabularInline):
-#     model = CartItem
-#     extra = 1
+class CartItemInline(admin.TabularInline):
+    model = CartItem
+    extra = 1
 
 
-# @admin.register(Cart)
-# class CartAdmin(admin.ModelAdmin):
-#     inlines = [CartItemInline]
-#     list_display = ('user',)
-#     search_fields = ('user',)
-#     list_filter = ('user',)
+@admin.register(Cart)
+class CartAdmin(admin.ModelAdmin):
+    inlines = [CartItemInline]
+    list_display = ('user',)
+    search_fields = ('user',)
+    list_filter = ('user',)
+
+    def has_delete_permission(self, request, obj=None):
+        return False 
+    
+    def has_change_permission(self, request, obj=None):
+        return False
 
 
 @admin.register(RunningLine)
