@@ -50,13 +50,16 @@
                         <img src="{% static 'img/default.jpg' %}" alt="Нет изображения" class="product-image">
                     {% endif %}
                 </div>
-                    
+
                 <div class="product-details">
-                    <div class="top_part big">
-                        <p class="product-title">{{item.product.name}}</p>
-                        <p class="product-description">{{item.product.description}}</p>                    
+                    <div class = "top">
+                        <div class="product-title">{{item.product.name}}</div>
                     </div>
-                    <div class="product-price">{{ item.price_item.price }} ₽</div>
+                    <div class = "bottom">
+                        <div class="product-description">{{item.product.description}}</div>
+                        <div class="product-price">{{ item.price_item.price }} ₽</div>    
+                    </div>
+                    
                 </div>
             </div>
     {% endfor %}

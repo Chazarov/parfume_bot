@@ -48,11 +48,14 @@
                 </div>
                     
                 <div class="product-details">
-                    <div class="top_part">
-                        <p class="product-title">{{product.name}}</p>
-                        <p class="product-description">{{product.description}}</p>                    
+                    <div class = "top">
+                        <div class="product-title">{{product.name}}</div>
                     </div>
-                    <div class="product-price">от {{ product.price_volume_items.all.0.price }} ₽</div>
+                    <div class = "bottom">
+                        <div class="product-description">{{product.description}}</div>
+                        <div class="product-price">от {{ product.price_volume_items.all.0.price }} ₽</div>    
+                    </div>
+                    
                 </div>
             </div>
     {% endfor %}

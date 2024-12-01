@@ -47,10 +47,12 @@
     <div class="all">
         <input checked type="radio" name="respond" id="desktop"/>
             <article id="slider">
-                <div class="center-buttons">
-                    <button class="arrow left" id = "prev_button"><img src="{% static 'img/prev.png' %}"></button>
-                    <button class="arrow right" id = "next_button"><img src="{% static 'img/next.png' %}"></button>
-                </div>
+                {% if images_count > 1 %}
+                    <div class="center-buttons">
+                        <button class="arrow left" id = "prev_button"><img src="{% static 'img/prev.png' %}"></button>
+                        <button class="arrow right" id = "next_button"><img src="{% static 'img/next.png' %}"></button>
+                    </div>
+                {% endif %}
                 {% for i in range_images %}
                     <input {% if forloop.first %}checked{% endif %} type="radio" name="slider" id="switch{{forloop.counter}}" >
                 {% endfor %}
@@ -118,6 +120,10 @@
                     <div class = "parametrs_space_between">
                         <div class = "item">Товарный вид:</div> <div class = "value"> {{product.type_of_product}} </div>
                         <div class = "item"> Страна-производитель: </div> <div class = "value">{{product.country}}</div>
+                    </div>
+
+                    <div class = "description">
+                        {{product.description}}
                     </div>
                     
                 </div>

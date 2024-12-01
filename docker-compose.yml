@@ -69,7 +69,7 @@ services:
     volumes:
       - ./bot:/app
     environment:
-      - BOT_TOKEN=7570491150:AAEmBEoVdq4I8laut3im76RP95xPHoulEQ8
+      - BOT_TOKEN=7730400515:AAFfSdwavxi2pzzwLSS4TWllT7EjIaNs32M
       - MAIN_HOST=0.0.0.0
       - MAIN_PORT=8080
     networks:
