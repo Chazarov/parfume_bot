@@ -162,7 +162,7 @@ hr {
     border-radius: 50%; 
 }
 .instagram_circle_widget .border{
-    z-index: 100;
+    z-index: 300;
     position: absolute;
     border: none;
     border-radius: 50%;
