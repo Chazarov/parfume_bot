@@ -2,9 +2,6 @@ function getCSRFToken() {
     return document.querySelector('[name=csrfmiddlewaretoken]').value;
 }
 
-
-
-
 function redirect(buttonElement){
     const redirect_url = buttonElement.getAttribute('data-redirect_url');
     window.location.href=redirect_url

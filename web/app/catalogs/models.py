@@ -6,7 +6,7 @@ from django.db import models
 class Category(models.Model):
     name = models.CharField("Название", max_length=55)
     description = models.TextField("Описание")
-    image = models.ImageField(upload_to='category_images/', null=True, blank=True)
+    image = models.ImageField(upload_to='category_images/')
 
     class Meta:
         verbose_name_plural = "Категории"
@@ -20,7 +20,7 @@ class Category(models.Model):
 class Brand(models.Model):
     name = models.CharField("Название", max_length=55)
     description = models.TextField("Описание")
-    image = models.ImageField(upload_to='brand_images/', null=True, blank=True)
+    image = models.ImageField(upload_to='brand_images/')
 
     class Meta:
         verbose_name_plural = "Бренды"
@@ -43,7 +43,7 @@ class Product(models.Model):
     name = models.CharField("Название", max_length=55)
     description = models.TextField("Описание", blank=True)
     brand = models.ForeignKey(Brand, null=True, on_delete=models.SET_NULL, blank=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL, blank=True)
     country = models.CharField("Страна производитель", default="неизвестно", max_length=55)
     type_of_product = models.ForeignKey(ProductType, on_delete=models.CASCADE, related_name="product_type")
 
