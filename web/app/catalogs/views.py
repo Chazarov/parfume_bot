@@ -42,7 +42,7 @@ def category_catalogs(request, category_id):
 
 
 def brands_catalog_by_category(request, category_id):
-    brands = Brand.objects.filter(product__category_id=category_id).distinct()
+    brands = Brand.objects.filter(product__category_id=category_id).distinct().order_by('name')
     if(brands.exists()):
         return render(request, 'catalogs/brand_catalog.html', 
         {
