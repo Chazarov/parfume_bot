@@ -33,13 +33,21 @@ async def process_cart(request: Request):
     admin_message = f"id:{telegram_id} @{username}:\n\n\n{cart_items}"
     
     try:
-        await bot.send_message(telegram_id, user_message)
         await bot.send_message(admin_id, admin_message)
         
     except TelegramBadRequest as e:
         return {"error": f"Ошибка Telegram: {str(e)}"}, 400
     except Exception as e:
         return {"error": f"Произошла ошибка: {str(e)}"}, 500
+    
+    try:
+        await bot.send_message(telegram_id, user_message)
+        
+    except TelegramBadRequest as e:
+        return {"error": f"Ошибка Telegram: {str(e)}"}, 400
+    except Exception as e:
+        return {"error": f"Произошла ошибка: {str(e)}"}, 500
+
 
     return {"status": "Сообщение отправлено в Telegram"}
 
