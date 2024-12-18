@@ -263,7 +263,8 @@ def process_order(request: WSGIRequest):
 
 
     cart_items = []
-    for cart_item in CartItem.objects.filter(cart=cart):
+    cart_items_obcts = CartItem.objects.filter(cart=cart)
+    for cart_item in cart_items_obcts:
         cart_items.append({
             'product_id': cart_item.product.id,
             'name': cart_item.product.name,
@@ -273,7 +274,7 @@ def process_order(request: WSGIRequest):
 
     
     if not telegram_id:
-        return JsonResponse({'error': 'Telegram ID not provided'}, status=400)
+        return JsonResponse({'status': 'failure', 'error': 'Telegram ID not provided'}, status=400)
 
     response = requests.post(bot_api, json={
         'admin_id':admin_id,
@@ -287,6 +288,7 @@ def process_order(request: WSGIRequest):
 
     
     if response.status_code == 200:
+        cart_items_obcts.delete()
         return JsonResponse({'status': 'success'})
     else:
         return JsonResponse({'status': 'failure', 'details': f"{response.text}  {error}"}, status=response.status_code)
