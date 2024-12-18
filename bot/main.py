@@ -49,7 +49,7 @@ async def process_cart(request: Request):
         return {"error": f"Произошла ошибка: {str(e)}"}, 500
 
 
-    return {"status": "Сообщение отправлено в Telegram"}
+    return {"status": "Сообщение отправлено в Telegram"}, 200
 
 @dp.message(Command("start"))
 async def start_command(message: types.Message):
