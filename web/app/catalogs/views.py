@@ -298,5 +298,6 @@ def process_order(request: WSGIRequest):
     except Exception as e:
         traceback.print_exc()
         print("Ошибка при обработке заказа " + str(e))
+        print(response)
         return JsonResponse({'status': 'failure', 'details': f"Ошибка при обработке заказа  {e}"}, status=response.status_code)
     
