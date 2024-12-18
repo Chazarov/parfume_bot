@@ -295,6 +295,6 @@ def process_order(request: WSGIRequest):
         else:
             return JsonResponse({'status': 'failure', 'details': f"{response.text}  {error}"}, status=response.status_code)
     except Exception as e:
-        print("Ошибка при обработке заказа" + str(e))
-        return JsonResponse({'status': 'failure', 'details': f"Ошибка при обработке заказа  {response.text}  {error}"}, status=response.status_code)
+        print("Ошибка при обработке заказа " + str(e) + "  " + response + "  \n" + response.json())
+        return JsonResponse({'status': 'failure', 'details': f"Ошибка при обработке заказа  {response.text}"}, status=response.status_code)
     
