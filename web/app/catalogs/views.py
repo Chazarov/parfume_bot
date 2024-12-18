@@ -1,4 +1,5 @@
 import requests
+import traceback
 from typing import List
 import json
 from core.config import configs
@@ -295,6 +296,7 @@ def process_order(request: WSGIRequest):
         else:
             return JsonResponse({'status': 'failure', 'details': f"{response.text}  {error}"}, status=response.status_code)
     except Exception as e:
-        print("Ошибка при обработке заказа " + str(e) + "  " + response)
-        return JsonResponse({'status': 'failure', 'details': f"Ошибка при обработке заказа  {response.text}"}, status=response.status_code)
+        traceback.print_exc()
+        print("Ошибка при обработке заказа " + str(e))
+        return JsonResponse({'status': 'failure', 'details': f"Ошибка при обработке заказа  {e}"}, status=response.status_code)
     
