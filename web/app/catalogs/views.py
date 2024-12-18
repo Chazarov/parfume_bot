@@ -252,44 +252,49 @@ def to_channel(request):
 
 def process_order(request: WSGIRequest):
 
-    bot_api = configs.BOT_API_URL + "/cart"
+    try:
 
-    settings = Settings.objects.all().first()
-    admin_id = settings.admin_id
-    
-    cart: Cart = request.cart
-    telegram_id = request.GET.get('tgUserId')  
-    username = request.GET.get('username')
+        bot_api = configs.BOT_API_URL + "/cart"
+
+        settings = Settings.objects.all().first()
+        admin_id = settings.admin_id
+        
+        cart: Cart = request.cart
+        telegram_id = request.GET.get('tgUserId')  
+        username = request.GET.get('username')
 
 
-    cart_items = []
-    cart_items_obcts = CartItem.objects.filter(cart=cart)
-    for cart_item in cart_items_obcts:
-        cart_items.append({
-            'product_id': cart_item.product.id,
-            'name': cart_item.product.name,
-            'price': cart_item.price_item.price,
-            'volume': cart_item.price_item.volume,
+        cart_items = []
+        cart_items_obcts = CartItem.objects.filter(cart=cart)
+        for cart_item in cart_items_obcts:
+            cart_items.append({
+                'product_id': cart_item.product.id,
+                'name': cart_item.product.name,
+                'price': cart_item.price_item.price,
+                'volume': cart_item.price_item.volume,
+            })
+
+        
+        if not telegram_id:
+            return JsonResponse({'status': 'failure', 'error': 'Telegram ID not provided'}, status=400)
+
+        response = requests.post(bot_api, json={
+            'admin_id':admin_id,
+            'telegram_id': telegram_id,
+            'username': username,
+            'cart': cart_items,
         })
 
-    
-    if not telegram_id:
-        return JsonResponse({'status': 'failure', 'error': 'Telegram ID not provided'}, status=400)
+        error = response.json().get("error")
+        
 
-    response = requests.post(bot_api, json={
-        'admin_id':admin_id,
-        'telegram_id': telegram_id,
-        'username': username,
-        'cart': cart_items,
-    })
-
-    error = response.json().get("error")
-    
-
-    
-    if response.status_code == 200:
-        cart_items_obcts.delete()
-        return JsonResponse({'status': 'success'})
-    else:
-        return JsonResponse({'status': 'failure', 'details': f"{response.text}  {error}"}, status=response.status_code)
+        
+        if response.status_code == 200:
+            cart_items_obcts.delete()
+            return JsonResponse({'status': 'success'})
+        else:
+            return JsonResponse({'status': 'failure', 'details': f"{response.text}  {error}"}, status=response.status_code)
+    except Exception as e:
+        print("Ошибка при обработке заказа" + str(e))
+        return JsonResponse({'status': 'failure', 'details': f"Ошибка при обработке заказа  {response.text}  {error}"}, status=response.status_code)
     
