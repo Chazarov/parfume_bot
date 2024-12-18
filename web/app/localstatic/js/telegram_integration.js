@@ -36,7 +36,6 @@ function sendCartToServer(buttonElement) {
             }
         })
         .catch(error => {
-            console.log(data);
             alert('Ошибка сети:' + error);
         });
 
