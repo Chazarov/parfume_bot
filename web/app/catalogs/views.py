@@ -286,15 +286,17 @@ def process_order(request: WSGIRequest):
             'cart': cart_items,
         })
 
-        error = response.json().get("error")
-        
-
+        try:
+            error = response.json().get("error")
+        except:
+            error = None
         
         if response.status_code == 200:
             cart_items_obcts.delete()
             return JsonResponse({'status': 'success'})
         else:
             return JsonResponse({'status': 'failure', 'details': f"{response.text}  {error}"}, status=response.status_code)
+        
     except Exception as e:
         traceback.print_exc()
         print("Ошибка при обработке заказа " + str(e))
