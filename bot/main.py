@@ -53,7 +53,7 @@ async def process_cart(request: Request):
 
 @dp.message(Command("start"))
 async def start_command(message: types.Message):
-    await message.answer("Привет!")
+    await message.answer("Здравствуйте! Рад приветствовать Вас в нашей галерее! Я L’ARIAN - виртуальный помощник и проводник по галерее Парфюма! Здесь Вы можете  выбрать и подобрать аромат для себя и близкого человека,  а также оформить заказ желаемого товара!")
 
 async def start_uvicorn():
     config = uvicorn.Config(app, host=configs.MAIN_HOST, port=int(configs.MAIN_PORT))
