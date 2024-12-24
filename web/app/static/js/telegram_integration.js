@@ -28,7 +28,7 @@ function sendCartToServer(buttonElement) {
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
-                alert('Благодарим за заказ! В ближайшее время с вами свяжется наш оператор.');
+                alert('Благодарим за заказ! \n В ближайшее время наш оператор свяжется с Вами для уточнения деталей.');
                 window.location.href=redirect_to;
             } else {
                 alert('Ошибка при отправке данных:' + data.details);
