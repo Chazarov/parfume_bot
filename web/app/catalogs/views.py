@@ -99,7 +99,7 @@ def product_by_brend_and_category(request,  brand_id, category_id):
     return render(request, 'catalogs/product_catalog.html',
     {
         "products":products,
-        "title":f"{category.name} {brand.name}",
+        "title":f"{brand.name}",
         "products_in_cart":products_in_cart,
     })
 

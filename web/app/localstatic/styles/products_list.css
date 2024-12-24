@@ -75,8 +75,15 @@
         display: flex;
         flex: 1;
 
+        .product-volume{
+            flex: 1;
+            font-family: 'Futura';
+            margin: 4px;
+            font-size: 1em;
+        }
+
         .product-description {
-            flex: 4;
+            flex: 3;
             font-family: 'Gotham';
             font-size: 0.8em;
         }

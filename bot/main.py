@@ -26,10 +26,10 @@ async def process_cart(request: Request):
         return {"error": "Telegram ID не предоставлен"}, 400
     
     cart_items = "\n\n".join(
-        [f"№{item['product_id']} {item['name']}: \n {item['price']} X volume: {item['volume']}ml Р" for item in cart]
+        [f"№{item['product_id']} {item['name']}: \n  -- цена: {item['price']} ₽ \n  -- объем: {item['volume']}ml " for item in cart]
     )
     
-    user_message = f"Ваши товары:\n{cart_items}.\n\n Благодарим за заказ! В ближайшее время с вами свяжется наш оператор, для дальнейшего согласования"
+    user_message = f"Ваши товары:\n{cart_items}.\n\n Благодарим за заказ! \n В ближайшее время наш оператор свяжется с Вами для уточнения деталей."
     admin_message = f"id:{telegram_id} @{username}:\n\n\n{cart_items}"
     
     try:

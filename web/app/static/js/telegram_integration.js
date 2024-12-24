@@ -10,9 +10,9 @@ function sendCartToServer(buttonElement) {
         const tg = window.Telegram.WebApp; 
 
 
-        const userId = tg.initDataUnsafe.user.id;
+        const userId = tg.initDataUnsafe.user.id
         const username = tg.initDataUnsafe.user.username
-        const actionUrl = buttonElement.getAttribute('data-action_url');
+        const actionUrl = buttonElement.getAttribute('data-action_url')
         const redirect_to = buttonElement.getAttribute('data-redirect_url')
 
         const params = new URLSearchParams({
@@ -28,11 +28,10 @@ function sendCartToServer(buttonElement) {
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
-
                 alert('Благодарим за заказ! В ближайшее время с вами свяжется наш оператор.');
-                window.location.href=redirect_to
+                window.location.href=redirect_to;
             } else {
-                alert('Ошибка при отправке данных:' + data.details)
+                alert('Ошибка при отправке данных:' + data.details);
                 console.error('Ошибка при отправке данных:', data.details);
             }
         })
