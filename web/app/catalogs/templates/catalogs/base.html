@@ -35,12 +35,17 @@
     <div id="content" style="display: none;">
         {% block header %}
             <div class="header">
-                <div class="inner_container">
+                <div class="back_arrow_container">
+                    <button class="history_back_button" data-action = "history_back"><i class="fa fa-chevron-left fa-2x"></i></button>
+                </div>
+
+                <div class="header_container">
                     <div class="main_title" id="debug">
                         {% block header_title%}
                         {% endblock %}
                     </div>
                 </div>
+                
             </div>
         {% endblock %}
 
@@ -68,6 +73,7 @@
     <script src="{% static 'js/tg_extands.js' %} "></script>
     <script src="{% static 'js/redirect.js' %} "></script>
     <script src="{% static 'js/cart_counter.js' %} "></script>
+    <script src="{% static 'js/history_navigation.js' %} "></script>
 
 </body>
 </html>

@@ -92,7 +92,7 @@ DATABASES = {
         'NAME': configs.DB.NAME,
         'USER': configs.DB.USER,
         'PASSWORD': configs.DB.PASSWORD,
-        'HOST': configs.DB.HOST,  # имя сервиса, который будет доступен внутри Docker-сети
+        'HOST': configs.DB.HOST, 
         'PORT': configs.DB.PORT,
     }
 }

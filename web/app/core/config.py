@@ -71,3 +71,5 @@ class Configs:
 
 
 configs = Configs()
+
+print(f"❗❗DB_CONNECTION: {configs.DB.URL}")
