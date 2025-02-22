@@ -10,6 +10,7 @@
     --font_color: rgb(71, 74, 81);
     --button_color: rgb(71, 74, 81);
     --slider_button_color: rgb(71, 74, 81);
+    --color_4: rgb(105, 105, 105);
     --color_3_transpanent: rgba(16, 17, 19, 0.781);
 }
 
@@ -104,7 +105,17 @@ hr {
     margin-bottom: 20px;
 }
 
+.header_container {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 3px;
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+}
+
 .inner_container {
+    width: 100%;
     overflow: hidden;
     border-radius: 3px;
     display: flex;
@@ -162,7 +173,7 @@ hr {
     border-radius: 50%; 
 }
 .instagram_circle_widget .border{
-    z-index: 300;
+    z-index: 100;
     position: absolute;
     border: none;
     border-radius: 50%;
@@ -291,4 +302,23 @@ hr {
     padding: 5px 10px;
     font-size: 12px;
     font-weight: 100;
+}
+
+.back_arrow_container{
+    z-index: 500;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.history_back_button{
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer
+}
+.history_back_button:hover{
+    color: var(--choise_color);
 }

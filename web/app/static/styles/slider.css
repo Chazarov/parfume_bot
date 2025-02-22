@@ -39,7 +39,7 @@
 	font-family: 'Futura';
 
 	height: 30px;
-	background-color: var(--button_color);
+	background-color: var(--color_4);
 	color: var(--primary_color)
 }
 .slide .inner_button:hover{
@@ -55,9 +55,9 @@
 	left: 30px;
 
 	font-family: 'Futura';
-	font-size: 20px;
+	font-size: 22px;
 
-	color: var(--primary_color)
+	color: var(--color_4)
 }
 
 #overflow{ 
