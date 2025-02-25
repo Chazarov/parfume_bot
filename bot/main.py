@@ -38,21 +38,21 @@ async def process_cart(request: Request):
         await bot.send_message(admin_id, admin_message)
         
     except TelegramBadRequest as e:
-        print(f"Ошибка Telegram: {str(e)}")
-        return {"error": f"Ошибка Telegram: {str(e)}  \n data:{data}"}, 400
+        print(f"Ошибка Telegram: {str(e)} \n data: {data}")
+        return {"error": f"Ошибка Telegram: {str(e)}"}, 400
     except Exception as e:
-        print(f"Произошла ошибка: {str(e)}")
-        return {"error": f"Произошла ошибка: {str(e)}  \n data:{data}"}, 500
+        print(f"Произошла ошибка: {str(e)} \n data: {data}")
+        return {"error": f"Произошла ошибка: {str(e)}"}, 500
     
     try:
         await bot.send_message(telegram_id, user_message)
         
     except TelegramBadRequest as e:
-        print(f"Ошибка Telegram: {str(e)}")
-        return {"error": f"Ошибка Telegram: {str(e)}  \n data:{data}"}, 400
+        print(f"Ошибка Telegram: {str(e)} \n data: {data}")
+        return {"error": f"Ошибка Telegram: {str(e)}"}, 400
     except Exception as e:
-        print(f"Произошла ошибка: {str(e)}")
-        return {"error": f"Произошла ошибка: {str(e)}  \n data:{data}"}, 500
+        print(f"Произошла ошибка: {str(e)} \n data: {data}")
+        return {"error": f"Произошла ошибка: {str(e)}"}, 500
 
 
     return {"status": "Сообщение отправлено в Telegram"}, 200
