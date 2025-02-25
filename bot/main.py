@@ -20,9 +20,11 @@ async def process_cart(request: Request):
     admin_id = data.get('admin_id')
 
     if not admin_id:
+        print("Admin ID не предоставлен")
         return {"error": "Admin ID не предоставлен"}, 400
     
     if not telegram_id:
+        print("Admin ID не предоставлен")
         return {"error": "Telegram ID не предоставлен"}, 400
     
     cart_items = "\n\n".join(
@@ -36,16 +38,20 @@ async def process_cart(request: Request):
         await bot.send_message(admin_id, admin_message)
         
     except TelegramBadRequest as e:
+        print(f"Ошибка Telegram: {str(e)}")
         return {"error": f"Ошибка Telegram: {str(e)}"}, 400
     except Exception as e:
+        print(f"Произошла ошибка: {str(e)}")
         return {"error": f"Произошла ошибка: {str(e)}"}, 500
     
     try:
         await bot.send_message(telegram_id, user_message)
         
     except TelegramBadRequest as e:
+        print(f"Ошибка Telegram: {str(e)}")
         return {"error": f"Ошибка Telegram: {str(e)}"}, 400
     except Exception as e:
+        print(f"Произошла ошибка: {str(e)}")
         return {"error": f"Произошла ошибка: {str(e)}"}, 500
 
 
