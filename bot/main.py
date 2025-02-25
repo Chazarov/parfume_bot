@@ -39,20 +39,20 @@ async def process_cart(request: Request):
         
     except TelegramBadRequest as e:
         print(f"Ошибка Telegram: {str(e)}")
-        return {"error": f"Ошибка Telegram: {str(e)}"}, 400
+        return {"error": f"Ошибка Telegram: {str(e)}  \n data:{data}"}, 400
     except Exception as e:
         print(f"Произошла ошибка: {str(e)}")
-        return {"error": f"Произошла ошибка: {str(e)}"}, 500
+        return {"error": f"Произошла ошибка: {str(e)}  \n data:{data}"}, 500
     
     try:
         await bot.send_message(telegram_id, user_message)
         
     except TelegramBadRequest as e:
         print(f"Ошибка Telegram: {str(e)}")
-        return {"error": f"Ошибка Telegram: {str(e)}"}, 400
+        return {"error": f"Ошибка Telegram: {str(e)}  \n data:{data}"}, 400
     except Exception as e:
         print(f"Произошла ошибка: {str(e)}")
-        return {"error": f"Произошла ошибка: {str(e)}"}, 500
+        return {"error": f"Произошла ошибка: {str(e)}  \n data:{data}"}, 500
 
 
     return {"status": "Сообщение отправлено в Telegram"}, 200
